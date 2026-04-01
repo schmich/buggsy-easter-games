@@ -20,12 +20,12 @@ export default function SolvedGroup({ group }: SolvedGroupProps) {
       style={{ backgroundColor: colors.bg, color: colors.text }}
     >
       <p
-        className="text-sm uppercase"
+        className="text-base uppercase"
 
       >
         {group.category}
       </p>
-      <p className="text-xs mt-1 opacity-80">
+      <p className="text-sm mt-1 opacity-80">
         {group.words.join(", ")}
       </p>
     </div>
