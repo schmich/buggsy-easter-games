@@ -76,7 +76,7 @@ export default function Tile({
     <div
       className={`
         w-[62px] h-[62px] flex items-center justify-center
-        text-[2rem] font-normal uppercase leading-none
+        text-[2rem] uppercase leading-none
         border-2 box-border
         ${pop ? "scale-[1.08]" : "scale-100"}
         ${flipping ? "animate-flip-in" : ""}

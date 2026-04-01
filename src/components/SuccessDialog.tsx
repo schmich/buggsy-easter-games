@@ -47,11 +47,11 @@ export default function SuccessDialog({
               {/* Success message */}
               <p
                 className="text-[#6b4c8a] text-2xl mb-1"
-                style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+  
               >
                 {message}!
               </p>
-              <p className="text-[#6b4c8a]/70 text-sm mb-1">
+              <p className="text-[#6b4c8a]/70 text-base mb-1">
                 Solved in {guessCount} {guessCount === 1 ? "guess" : "guesses"}
               </p>
 
@@ -70,7 +70,7 @@ export default function SuccessDialog({
 
               <p
                 className="text-[#1a1a2e] text-lg mb-6"
-                style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+  
               >
                 Ready for the next challenge?
               </p>
@@ -78,7 +78,7 @@ export default function SuccessDialog({
               <Button
                 onPress={onNext}
                 className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-lg px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
-                style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+  
               >
                 Bring It On 🐰
               </Button>

@@ -46,7 +46,7 @@ export default function ConnectionsEndDialog({
               {/* Result message */}
               <p
                 className="text-[#6b4c8a] text-2xl mb-4"
-                style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+
               >
                 {won ? "Egg-cellent!" : "Better luck next time!"}
               </p>

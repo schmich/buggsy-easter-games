@@ -153,27 +153,25 @@ export default function Connections() {
           <div className="flex gap-3 mt-1">
             <Button
               onPress={handleShuffle}
-              className="border-2 border-[#6b4c8a] text-[#6b4c8a] bg-transparent rounded-full px-5 py-2 cursor-pointer hover:bg-[#6b4c8a]/10 transition-colors"
-              style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+              className="border-2 border-[#6b4c8a] text-[#6b4c8a] bg-transparent rounded-full px-5 py-2 text-base font-bold cursor-pointer hover:bg-[#6b4c8a]/10 transition-colors"
             >
               Shuffle
             </Button>
             <Button
               onPress={handleDeselect}
-              className="border-2 border-[#6b4c8a] text-[#6b4c8a] bg-transparent rounded-full px-5 py-2 cursor-pointer hover:bg-[#6b4c8a]/10 transition-colors"
-              style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+              className="border-2 border-[#6b4c8a] text-[#6b4c8a] bg-transparent rounded-full px-5 py-2 text-base font-bold cursor-pointer hover:bg-[#6b4c8a]/10 transition-colors"
             >
               Deselect All
             </Button>
             <Button
               onPress={handleSubmit}
               isDisabled={selectedWords.length !== 4}
-              className={`rounded-full px-5 py-2 transition-colors cursor-pointer ${
+              className={`rounded-full px-5 py-2 text-base font-bold transition-colors cursor-pointer ${
                 selectedWords.length === 4
                   ? "bg-[#6b4c8a] text-white hover:bg-[#5a3d78]"
                   : "bg-[#6b4c8a]/30 text-white/50 cursor-not-allowed"
               }`}
-              style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+
             >
               Submit
             </Button>

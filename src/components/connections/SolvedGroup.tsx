@@ -21,7 +21,7 @@ export default function SolvedGroup({ group }: SolvedGroupProps) {
     >
       <p
         className="text-sm uppercase"
-        style={{ fontFamily: "'Gloria Hallelujah', cursive" }}
+
       >
         {group.category}
       </p>

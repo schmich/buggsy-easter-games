@@ -41,7 +41,6 @@ export default function Keyboard({ onKey, letterStates, disabled }: KeyboardProp
                 onClick={() => onKey(key)}
                 className={`
                   flex items-center justify-center rounded-[4px]
-                  font-normal
                   h-[58px] select-none
                   ${disabled ? "cursor-default" : "cursor-pointer active:opacity-70"}
                   ${isWide ? "text-xs px-1 flex-[1.5]" : "text-[1.1rem] flex-1"}

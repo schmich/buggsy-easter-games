@@ -29,7 +29,6 @@ export default function ConnectionsTile({
         ${shrink ? "animate-shrink-away" : ""}
       `}
       style={{
-        fontFamily: "'Gloria Hallelujah', cursive",
         fontSize: word.length > 7 ? "0.7rem" : "0.85rem",
         animationDelay: bounce ? `${bounceDelay}ms` : undefined,
         animationFillMode: bounce || shrink ? "both" : undefined,
