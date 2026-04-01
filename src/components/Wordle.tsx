@@ -1,0 +1,209 @@
+import { useState, useCallback, useEffect, useRef } from "react";
+import Grid from "./Grid";
+import Keyboard from "./Keyboard";
+import Header from "./Header";
+import Toast from "./Toast";
+import { evaluateGuess, type LetterResult } from "../lib/wordle";
+import { isValidWord } from "../lib/words";
+
+const MAX_GUESSES = 6;
+
+interface WordleProps {
+  targetWord: string;
+}
+
+export default function Wordle({ targetWord }: WordleProps) {
+  const word = targetWord.toUpperCase();
+  const wordLength = word.length;
+
+  const [guesses, setGuesses] = useState<string[]>([]);
+  const [results, setResults] = useState<LetterResult[][]>([]);
+  const [currentGuess, setCurrentGuess] = useState("");
+  const [gameOver, setGameOver] = useState(false);
+  const [won, setWon] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const [shakeRow, setShakeRow] = useState(-1);
+  const [revealRow, setRevealRow] = useState(-1);
+  const [bounceRow, setBounceRow] = useState(-1);
+  const [revealedCount, setRevealedCount] = useState(0);
+  const revealingRef = useRef(false);
+
+  const showToast = useCallback((msg: string, duration = 1500) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), duration);
+  }, []);
+
+  const submitGuess = useCallback(() => {
+    if (currentGuess.length !== wordLength) {
+      showToast("Not enough letters");
+      setShakeRow(guesses.length);
+      setTimeout(() => setShakeRow(-1), 600);
+      return;
+    }
+
+    if (!isValidWord(currentGuess)) {
+      showToast("Not in word list");
+      setShakeRow(guesses.length);
+      setTimeout(() => setShakeRow(-1), 600);
+      return;
+    }
+
+    if (guesses.includes(currentGuess)) {
+      showToast("Already guessed");
+      setShakeRow(guesses.length);
+      setTimeout(() => setShakeRow(-1), 600);
+      return;
+    }
+
+    const result = evaluateGuess(currentGuess, word);
+    const newGuesses = [...guesses, currentGuess];
+    const newResults = [...results, result];
+
+    setGuesses(newGuesses);
+    setResults(newResults);
+    setCurrentGuess("");
+    setRevealRow(newGuesses.length - 1);
+    revealingRef.current = true;
+
+    const isWin = result.every((r) => r === "correct");
+    const isLoss = newGuesses.length >= MAX_GUESSES && !isWin;
+
+    // Delay until all tiles in the row have finished flipping
+    const revealDuration = wordLength * 350 + 500;
+
+    // Update keyboard colors only after full row reveal
+    setTimeout(() => {
+      setRevealedCount(newGuesses.length);
+      revealingRef.current = false;
+    }, revealDuration);
+
+    if (isWin) {
+      setTimeout(() => {
+        setBounceRow(newGuesses.length - 1);
+        setWon(true);
+        setGameOver(true);
+        const messages = [
+          "Genius",
+          "Magnificent",
+          "Impressive",
+          "Splendid",
+          "Great",
+          "Phew",
+        ];
+        showToast(messages[newGuesses.length - 1] || "Nice!", 2000);
+      }, revealDuration);
+    } else if (isLoss) {
+      setTimeout(() => {
+        setGameOver(true);
+        showToast(word, 3000);
+      }, revealDuration);
+    }
+  }, [currentGuess, guesses, results, word, wordLength, showToast]);
+
+  const onKey = useCallback(
+    (key: string) => {
+      if (gameOver || revealingRef.current) return;
+
+      if (key === "ENTER") {
+        submitGuess();
+      } else if (key === "BACKSPACE") {
+        setCurrentGuess((prev) => prev.slice(0, -1));
+      } else if (/^[A-Z]$/.test(key) && currentGuess.length < wordLength) {
+        setCurrentGuess((prev) => prev + key);
+      }
+    },
+    [gameOver, submitGuess, currentGuess.length, wordLength]
+  );
+
+  // Physical keyboard handler
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key === "Enter") {
+        onKey("ENTER");
+      } else if (e.key === "Backspace") {
+        onKey("BACKSPACE");
+      } else if (/^[a-zA-Z]$/.test(e.key)) {
+        onKey(e.key.toUpperCase());
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onKey]);
+
+  // Build keyboard color map — only include fully revealed rows
+  const letterStates = new Map<string, LetterResult>();
+  for (let gi = 0; gi < revealedCount; gi++) {
+    const guess = guesses[gi];
+    for (let i = 0; i < guess.length; i++) {
+      const letter = guess[i];
+      const result = results[gi][i];
+      const current = letterStates.get(letter);
+      // Priority: correct > present > absent
+      if (
+        result === "correct" ||
+        (result === "present" && current !== "correct") ||
+        (result === "absent" && !current)
+      ) {
+        letterStates.set(letter, result);
+      }
+    }
+  }
+
+  return (
+    <div
+      className="flex flex-col h-dvh font-sans select-none relative overflow-hidden"
+      style={{
+        background: "linear-gradient(180deg, #f0e6f6 0%, #e8f5e9 40%, #fef9e7 100%)",
+      }}
+    >
+      <Header />
+      <Toast message={toast} />
+
+      {/* Easter decorations */}
+      <img
+        src="/images/grass.webp"
+        alt=""
+        className="absolute bottom-0 left-0 w-full opacity-20 pointer-events-none z-[1]"
+      />
+      <img
+        src="/images/eggs-grass.webp"
+        alt=""
+        className="absolute bottom-0 left-0 w-[180px] opacity-80 pointer-events-none z-[2]"
+      />
+      <img
+        src="/images/grass-basket.webp"
+        alt=""
+        className="absolute bottom-0 right-0 w-[160px] opacity-80 pointer-events-none z-[2]"
+      />
+      <img
+        src="/images/bunny.webp"
+        alt=""
+        className="absolute top-[70px] left-3 w-[60px] opacity-30 pointer-events-none animate-float"
+      />
+      <img
+        src="/images/basket.webp"
+        alt=""
+        className="absolute top-[70px] right-3 w-[60px] opacity-30 pointer-events-none animate-float"
+        style={{ animationDelay: "1.5s" }}
+      />
+
+      <div className="flex flex-col items-center justify-between flex-1 overflow-hidden relative z-10">
+        <div className="flex items-center justify-center flex-1 w-full">
+          <Grid
+            guesses={guesses}
+            results={results}
+            currentGuess={currentGuess}
+            maxGuesses={MAX_GUESSES}
+            wordLength={wordLength}
+            shakeRow={shakeRow}
+            revealRow={revealRow}
+            bounceRow={bounceRow}
+            won={won}
+          />
+        </div>
+        <Keyboard onKey={onKey} letterStates={letterStates} disabled={gameOver} />
+      </div>
+    </div>
+  );
+}
