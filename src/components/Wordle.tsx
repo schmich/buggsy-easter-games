@@ -3,6 +3,7 @@ import Grid from "./Grid";
 import Keyboard from "./Keyboard";
 import Header from "./Header";
 import Toast from "./Toast";
+import SuccessDialog from "./SuccessDialog";
 import { evaluateGuess, type LetterResult } from "../lib/wordle";
 import { isValidWord } from "../lib/words";
 
@@ -27,6 +28,7 @@ export default function Wordle({ targetWord }: WordleProps) {
   const [bounceRow, setBounceRow] = useState(-1);
   const [revealedCount, setRevealedCount] = useState(0);
   const revealingRef = useRef(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const showToast = useCallback((msg: string, duration = 1500) => {
     setToast(msg);
@@ -82,16 +84,11 @@ export default function Wordle({ targetWord }: WordleProps) {
         setBounceRow(newGuesses.length - 1);
         setWon(true);
         setGameOver(true);
-        const messages = [
-          "Genius",
-          "Magnificent",
-          "Impressive",
-          "Splendid",
-          "Great",
-          "Phew",
-        ];
-        showToast(messages[newGuesses.length - 1] || "Nice!", 2000);
       }, revealDuration);
+      // Show success dialog after bounce animation finishes
+      setTimeout(() => {
+        setShowSuccess(true);
+      }, revealDuration + 1200);
     } else if (isLoss) {
       setTimeout(() => {
         setGameOver(true);
@@ -204,6 +201,15 @@ export default function Wordle({ targetWord }: WordleProps) {
         </div>
         <Keyboard onKey={onKey} letterStates={letterStates} disabled={gameOver} />
       </div>
+
+      <SuccessDialog
+        isOpen={showSuccess}
+        onOpenChange={setShowSuccess}
+        guessCount={guesses.length}
+        onNext={() => {
+          // TODO: navigate to next challenge
+        }}
+      />
     </div>
   );
 }
