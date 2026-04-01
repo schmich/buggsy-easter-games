@@ -127,7 +127,7 @@ export default function Connections() {
     <>
       <Header title="Connections" />
       <Toast message={toast} />
-      <div className="flex flex-col items-center flex-1 overflow-y-auto px-4 py-4 gap-2">
+      <div className="flex flex-col items-center flex-1 overflow-y-auto px-4 gap-1.5" style={{ paddingTop: "10vh" }}>
         {/* Solved groups */}
         {solvedGroups.map((group) => (
           <SolvedGroup key={group.category} group={group} />

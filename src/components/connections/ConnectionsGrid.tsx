@@ -18,7 +18,7 @@ export default function ConnectionsGrid({
   shrinkingWords,
 }: ConnectionsGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-2 w-full max-w-[480px]">
+    <div className="grid grid-cols-4 gap-1.5 w-full max-w-[480px]">
       {words.map((word) => {
         const bounceIndex = bouncingWords.indexOf(word);
         return (

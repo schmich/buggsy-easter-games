@@ -52,7 +52,7 @@ export default function SuccessDialog({
               >
                 {message}!
               </p>
-              <p className="text-[#6b4c8a]/70 text-base mb-1">
+              <p className="text-[#6b4c8a]/70 text-lg mb-1">
                 Solved in {guessCount} {guessCount === 1 ? "guess" : "guesses"}
               </p>
 
@@ -70,7 +70,7 @@ export default function SuccessDialog({
               </div>
 
               <p
-                className="text-[#1a1a2e] text-lg mb-6"
+                className="text-[#1a1a2e] text-xl mb-6"
   
               >
                 Ready for the next challenge?
@@ -78,7 +78,7 @@ export default function SuccessDialog({
 
               <Button
                 onPress={onNext}
-                className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-lg px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
   
               >
                 Bring It On 🐰

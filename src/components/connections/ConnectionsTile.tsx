@@ -21,7 +21,7 @@ export default function ConnectionsTile({
     <button
       onClick={onToggle}
       className={`
-        h-[60px] rounded-lg flex items-center justify-center
+        h-[68px] rounded-lg flex items-center justify-center
         uppercase cursor-pointer transition-all duration-150
         ${isSelected ? "bg-[#6b4c8a] text-white scale-[1.03]" : "bg-[#e8d5f0] text-[#1a1a2e]"}
         ${shake ? "animate-shake" : ""}

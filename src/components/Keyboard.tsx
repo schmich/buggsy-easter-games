@@ -26,13 +26,13 @@ const resultTextColors: Record<LetterResult, string> = {
 
 export default function Keyboard({ onKey, letterStates, disabled }: KeyboardProps) {
   return (
-    <div className="flex flex-col items-center gap-[8px] pb-2 px-2 w-full max-w-[500px] mx-auto mb-1">
+    <div className="flex flex-col items-center gap-[4px] pb-2 px-2 w-full max-w-[500px] mx-auto mb-1">
       {rows.map((row, i) => (
-        <div key={i} className="flex gap-[6px] w-full justify-center">
+        <div key={i} className="flex gap-[3px] w-full justify-center">
           {row.map((key) => {
             const isWide = key === "ENTER" || key === "BACKSPACE";
             const state = letterStates.get(key);
-            const bg = state ? resultColors[state] : "#dce1ed";
+            const bg = state ? resultColors[state] : "#ffffff";
             const textColor = state ? resultTextColors[state] : "#1a1a2e";
 
             return (
@@ -40,7 +40,7 @@ export default function Keyboard({ onKey, letterStates, disabled }: KeyboardProp
                 key={key}
                 onClick={() => onKey(key)}
                 className={`
-                  flex items-center justify-center rounded-[4px]
+                  flex items-center justify-center rounded-[4px] border border-[#d3d6da]
                   h-[58px] select-none
                   ${disabled ? "cursor-default" : "cursor-pointer active:opacity-70"}
                   ${isWide ? "text-xs px-1 flex-[1.5]" : "text-[1.1rem] flex-1"}
