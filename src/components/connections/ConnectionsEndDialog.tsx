@@ -1,5 +1,6 @@
 import { Modal, useOverlayState } from "@heroui/react";
 import type { ConnectionsGroup } from "../../lib/connectionsData";
+import bunnyImg from "../../assets/bunny.webp";
 
 const DIFFICULTY_COLORS: Record<number, { bg: string; text: string }> = {
   0: { bg: "#f6c443", text: "#1a1a2e" },
@@ -38,7 +39,7 @@ export default function ConnectionsEndDialog({
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               {/* Bunny image */}
               <img
-                src="/images/bunny.webp"
+                src={bunnyImg}
                 alt=""
                 className="w-20 h-auto mb-3 animate-float"
               />

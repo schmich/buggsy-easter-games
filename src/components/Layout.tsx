@@ -1,4 +1,9 @@
 import { Outlet } from "react-router-dom";
+import grassImg from "../assets/grass.webp";
+import eggsGrassImg from "../assets/eggs-grass.webp";
+import grassBasketImg from "../assets/grass-basket.webp";
+import bunnyImg from "../assets/bunny.webp";
+import basketImg from "../assets/basket.webp";
 
 export default function Layout() {
   return (
@@ -11,27 +16,27 @@ export default function Layout() {
     >
       {/* Easter decorations */}
       <img
-        src="/images/grass.webp"
+        src={grassImg}
         alt=""
         className="absolute bottom-0 left-0 w-full opacity-20 pointer-events-none z-[1]"
       />
       <img
-        src="/images/eggs-grass.webp"
+        src={eggsGrassImg}
         alt=""
         className="absolute bottom-0 left-0 w-[180px] opacity-80 pointer-events-none z-[2]"
       />
       <img
-        src="/images/grass-basket.webp"
+        src={grassBasketImg}
         alt=""
         className="absolute bottom-0 right-0 w-[160px] opacity-80 pointer-events-none z-[2]"
       />
       <img
-        src="/images/bunny.webp"
+        src={bunnyImg}
         alt=""
         className="absolute top-[70px] left-3 w-[60px] opacity-30 pointer-events-none animate-float"
       />
       <img
-        src="/images/basket.webp"
+        src={basketImg}
         alt=""
         className="absolute top-[70px] right-3 w-[60px] opacity-30 pointer-events-none animate-float"
         style={{ animationDelay: "1.5s" }}

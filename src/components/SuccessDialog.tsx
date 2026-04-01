@@ -1,4 +1,5 @@
 import { Modal, Button, useOverlayState } from "@heroui/react";
+import bunnyImg from "../assets/bunny.webp";
 
 interface SuccessDialogProps {
   isOpen: boolean;
@@ -39,7 +40,7 @@ export default function SuccessDialog({
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               {/* Bunny image */}
               <img
-                src="/images/bunny.webp"
+                src={bunnyImg}
                 alt=""
                 className="w-20 h-auto mb-3 animate-float"
               />
