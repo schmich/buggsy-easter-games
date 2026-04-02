@@ -245,7 +245,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
           markIntroSeen("eggdle");
           setShowIntro(false);
         }}
-        image={images.eggfather}
+        image={images.eggfatherEggdle}
         title="Eggdle"
         description="Little do people know, The Eggfather is quite the wordsmith. See if you can crack his secret word."
       />

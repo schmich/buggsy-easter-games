@@ -7,6 +7,8 @@ import grassBasket from "./grass-basket.webp";
 import eggfather from "./eggfather.webp";
 import eggfatherWin from "./eggfather-win.webp";
 import eggfatherLose from "./eggfather-lose.webp";
+import eggfatherEggdle from "./eggfather-eggdle.webp";
+import eggfatherConneggtions from "./eggfather-coneggtions.webp";
 
 // Audio
 import eggdleWin from "./eggfather-eggdle-win.mp3";
@@ -21,6 +23,8 @@ export const images = {
   eggfather,
   eggfatherWin,
   eggfatherLose,
+  eggfatherEggdle,
+  eggfatherConneggtions,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded
