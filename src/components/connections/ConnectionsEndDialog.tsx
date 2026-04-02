@@ -47,8 +47,7 @@ export default function ConnectionsEndDialog({
                 alt=""
                 className="h-40 w-auto"
               />
-              <div className="w-48 h-[2px] bg-gradient-to-r from-transparent via-[#6b4c8a]/40 to-transparent" />
-              <div className="w-44 h-[20px] rounded-[50%] bg-radial-[at_top] from-[#6b4c8a]/20 via-[#6b4c8a]/10 to-transparent blur-[3px] mb-3" />
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b4c8a] to-transparent mb-3" />
 
               {/* Result message */}
               <p className="text-[#6b4c8a] text-2xl mb-1 text-center">
