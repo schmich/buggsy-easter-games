@@ -27,7 +27,7 @@ export const PUZZLE: ConnectionsPuzzle = {
     },
     {
       category: "____ Basket",
-      words: ["BREAD", "LAUNDRY", "WASTE", "PICNIC"],
+      words: ["BREAD", "LAUNDRY", "EASTER", "PICNIC"],
       difficulty: 3,
     },
   ],

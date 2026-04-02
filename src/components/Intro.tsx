@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Modal, Button, useOverlayState } from "@heroui/react";
-import bunnyImg from "../assets/bunny.webp";
+import { images } from "../assets";
 
 export default function Intro() {
   const navigate = useNavigate();
@@ -18,19 +18,21 @@ export default function Intro() {
 
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               <img
-                src={bunnyImg}
+                src={images.eggfather}
                 alt=""
-                className="w-24 h-auto mb-4 animate-float"
+                className="h-40 w-auto"
               />
+              <div className="w-48 h-[2px] bg-gradient-to-r from-transparent via-[#6b4c8a]/40 to-transparent" />
+              <div className="w-44 h-[20px] rounded-[50%] bg-radial-[at_top] from-[#6b4c8a]/20 via-[#6b4c8a]/10 to-transparent blur-[3px] mb-3" />
 
               <h1 className="text-[#6b4c8a] text-2xl text-center mb-3">
-                Welcome to Mr. Bunny's
+                Welcome to The Eggfather's
                 <br />
                 Easter Games 2026
               </h1>
 
               <p className="text-[#1a1a2e]/70 text-base text-center mb-6 leading-relaxed">
-                You are about to embark on a series of high-stakes games. Stay sharp, stay clever, and whatever you do, don't disappoint Mr. Bunny.
+                You are about to embark on a series of high-stakes games. Stay sharp, stay clever, and whatever you do, don't disappoint The Eggfather.
               </p>
 
               {/* Egg divider */}

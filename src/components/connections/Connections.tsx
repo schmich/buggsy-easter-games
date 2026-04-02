@@ -9,9 +9,7 @@ import ConnectionsEndDialog from "./ConnectionsEndDialog";
 import { PUZZLE } from "../../lib/connectionsData";
 import type { ConnectionsGroup } from "../../lib/connectionsData";
 import { checkGuess, shuffleWords } from "../../lib/connections";
-import applauseSfx from "../../assets/applause.mp3";
-
-const preloadedApplause = new Audio(applauseSfx);
+import { audio } from "../../assets";
 
 export default function Connections() {
   const [remainingWords, setRemainingWords] = useState<string[]>(() =>
@@ -115,8 +113,8 @@ export default function Connections() {
         if (newSolved.length === 4) {
           setWon(true);
           setGameOver(true);
-          preloadedApplause.currentTime = 0;
-          preloadedApplause.play();
+          audio.applause.currentTime = 0;
+          audio.applause.play();
         }
       }, 900);
     } else {
