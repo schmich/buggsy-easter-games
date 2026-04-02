@@ -13,6 +13,8 @@ import eggfatherConneggtions from "./eggfather-coneggtions.webp";
 // Audio
 import eggdleWin from "./eggfather-eggdle-win.mp3";
 import introMusic from "./intro-music.mp3";
+import swingMiss from "./eggfather-swing-miss.mp3";
+import aintItChief from "./eggfather-aint-it-chief.mp3";
 
 export const images = {
   bunny,
@@ -32,7 +34,7 @@ function preloadImage(src: string): Promise<void> {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => resolve();
-    img.onerror = () => resolve(); // don't block on errors
+    img.onerror = () => resolve();
     img.src = src;
     preloadedImages.push(img);
   });
@@ -56,7 +58,34 @@ export const audio = {
   introMusic: new Audio(introMusic),
 } as const;
 
+// Failed guess audio set — shuffled, cycles through all before reshuffling
+const failedClips = [
+  new Audio(swingMiss),
+  new Audio(aintItChief),
+];
+
+function shuffle<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+const failedQueue: HTMLAudioElement[] = shuffle(failedClips);
+let failedIndex = 0;
+
+export function playFailedAudio() {
+  const clip = failedQueue[failedIndex % failedQueue.length];
+  failedIndex++;
+  clip.currentTime = 0;
+  clip.play();
+}
+
+const allAudio = [...Object.values(audio), ...failedClips];
+
 export const assetsReady: Promise<void> = Promise.all([
   ...Object.values(images).map(preloadImage),
-  ...Object.values(audio).map(preloadAudio),
+  ...allAudio.map(preloadAudio),
 ]).then(() => {});

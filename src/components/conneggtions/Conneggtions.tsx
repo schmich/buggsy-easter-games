@@ -10,7 +10,7 @@ import GameIntroDialog from "../GameIntroDialog";
 import { PUZZLE } from "../../lib/conneggtionsData";
 import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 import { checkGuess, shuffleWords } from "../../lib/conneggtions";
-import { images } from "../../assets";
+import { images, playFailedAudio } from "../../assets";
 import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 export default function Conneggtions() {
@@ -124,6 +124,7 @@ export default function Conneggtions() {
       // Wrong guess
       setShakeSelected(true);
       setTimeout(() => setShakeSelected(false), 600);
+      playFailedAudio();
 
       if (result.oneAway) {
         showToast("One away!");
