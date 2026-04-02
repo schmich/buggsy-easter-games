@@ -1,5 +1,5 @@
 import { Modal, Button, useOverlayState } from "@heroui/react";
-import type { ConnectionsGroup } from "../../lib/connectionsData";
+import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 import { images } from "../../assets";
 
 const DIFFICULTY_COLORS: Record<number, { bg: string; text: string }> = {
@@ -9,21 +9,21 @@ const DIFFICULTY_COLORS: Record<number, { bg: string; text: string }> = {
   3: { bg: "#b07fd0", text: "#ffffff" },
 };
 
-interface ConnectionsEndDialogProps {
+interface ConneggtionsEndDialogProps {
   isOpen: boolean;
   won: boolean;
-  solvedGroups: ConnectionsGroup[];
+  solvedGroups: ConneggtionsGroup[];
   mistakesRemaining: number;
   onRetry: () => void;
 }
 
-export default function ConnectionsEndDialog({
+export default function ConneggtionsEndDialog({
   isOpen,
   won,
   solvedGroups,
   mistakesRemaining,
   onRetry,
-}: ConnectionsEndDialogProps) {
+}: ConneggtionsEndDialogProps) {
   const state = useOverlayState({
     isOpen,
     onOpenChange: () => {},

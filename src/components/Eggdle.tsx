@@ -214,7 +214,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
         isOpen={showSuccess}
         onOpenChange={setShowSuccess}
         guessCount={guesses.length}
-        onNext={() => navigate("/connections")}
+        onNext={() => navigate("/conneggtions")}
       />
 
       <FailureDialog

@@ -1,4 +1,4 @@
-interface ConnectionsTileProps {
+interface ConneggtionsTileProps {
   word: string;
   isSelected: boolean;
   onToggle: () => void;
@@ -8,7 +8,7 @@ interface ConnectionsTileProps {
   shrink: boolean;
 }
 
-export default function ConnectionsTile({
+export default function ConneggtionsTile({
   word,
   isSelected,
   onToggle,
@@ -16,7 +16,7 @@ export default function ConnectionsTile({
   bounce,
   bounceDelay,
   shrink,
-}: ConnectionsTileProps) {
+}: ConneggtionsTileProps) {
   return (
     <button
       onClick={onToggle}

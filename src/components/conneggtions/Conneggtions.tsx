@@ -2,21 +2,21 @@ import { useState, useCallback } from "react";
 import { Button } from "@heroui/react";
 import Header from "../Header";
 import Toast from "../Toast";
-import ConnectionsGrid from "./ConnectionsGrid";
+import ConneggtionsGrid from "./ConneggtionsGrid";
 import SolvedGroup from "./SolvedGroup";
 import MistakeIndicator from "./MistakeIndicator";
-import ConnectionsEndDialog from "./ConnectionsEndDialog";
-import { PUZZLE } from "../../lib/connectionsData";
-import type { ConnectionsGroup } from "../../lib/connectionsData";
-import { checkGuess, shuffleWords } from "../../lib/connections";
+import ConneggtionsEndDialog from "./ConneggtionsEndDialog";
+import { PUZZLE } from "../../lib/conneggtionsData";
+import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
+import { checkGuess, shuffleWords } from "../../lib/conneggtions";
 import { audio, images } from "../../assets";
 
-export default function Connections() {
+export default function Conneggtions() {
   const [remainingWords, setRemainingWords] = useState<string[]>(() =>
     shuffleWords(PUZZLE.groups.flatMap((g) => g.words))
   );
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
-  const [solvedGroups, setSolvedGroups] = useState<ConnectionsGroup[]>([]);
+  const [solvedGroups, setSolvedGroups] = useState<ConneggtionsGroup[]>([]);
   const [mistakesRemaining, setMistakesRemaining] = useState(4);
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
@@ -159,7 +159,7 @@ export default function Connections() {
 
         {/* Remaining word grid */}
         {remainingWords.length > 0 && (
-          <ConnectionsGrid
+          <ConneggtionsGrid
             key={gameKey}
             words={remainingWords}
             selectedWords={selectedWords}
@@ -204,7 +204,7 @@ export default function Connections() {
         )}
       </div>
 
-      <ConnectionsEndDialog
+      <ConneggtionsEndDialog
         isOpen={gameOver}
         won={won}
         solvedGroups={solvedGroups}

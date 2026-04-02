@@ -1,14 +1,14 @@
-import type { ConnectionsGroup, ConnectionsPuzzle } from "./connectionsData";
+import type { ConneggtionsGroup, ConneggtionsPuzzle } from "./conneggtionsData";
 
 export interface GuessResult {
   correct: boolean;
-  group?: ConnectionsGroup;
+  group?: ConneggtionsGroup;
   oneAway: boolean;
 }
 
 export function checkGuess(
   selectedWords: string[],
-  puzzle: ConnectionsPuzzle
+  puzzle: ConneggtionsPuzzle
 ): GuessResult {
   for (const group of puzzle.groups) {
     const matches = selectedWords.filter((w) =>

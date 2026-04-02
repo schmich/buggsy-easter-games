@@ -1,14 +1,14 @@
-export interface ConnectionsGroup {
+export interface ConneggtionsGroup {
   category: string;
   words: string[];
   difficulty: 0 | 1 | 2 | 3;
 }
 
-export interface ConnectionsPuzzle {
-  groups: [ConnectionsGroup, ConnectionsGroup, ConnectionsGroup, ConnectionsGroup];
+export interface ConneggtionsPuzzle {
+  groups: [ConneggtionsGroup, ConneggtionsGroup, ConneggtionsGroup, ConneggtionsGroup];
 }
 
-export const PUZZLE: ConnectionsPuzzle = {
+export const PUZZLE: ConneggtionsPuzzle = {
   groups: [
     {
       category: "Egg ____",

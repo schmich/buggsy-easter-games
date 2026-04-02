@@ -1,4 +1,4 @@
-import type { ConnectionsGroup } from "../../lib/connectionsData";
+import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 
 const DIFFICULTY_COLORS: Record<number, { bg: string; text: string }> = {
   0: { bg: "#f6c443", text: "#1a1a2e" },
@@ -8,7 +8,7 @@ const DIFFICULTY_COLORS: Record<number, { bg: string; text: string }> = {
 };
 
 interface SolvedGroupProps {
-  group: ConnectionsGroup;
+  group: ConneggtionsGroup;
 }
 
 export default function SolvedGroup({ group }: SolvedGroupProps) {
