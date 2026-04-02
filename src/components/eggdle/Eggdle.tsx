@@ -10,6 +10,7 @@ import GameIntroDialog from "../GameIntroDialog";
 import { evaluateGuess, type LetterResult } from "../../lib/eggdle";
 import { isValidWord } from "../../lib/words";
 import { audio, images } from "../../assets";
+import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 const MAX_GUESSES = 6;
 
@@ -37,7 +38,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
   const [showFailure, setShowFailure] = useState(false);
   const [gameKey, setGameKey] = useState(0);
   const [showIntro, setShowIntro] = useState(
-    () => !localStorage.getItem("eggdle-intro-seen")
+    () => !hasSeenIntro("eggdle")
   );
 
   const handleRetry = useCallback(() => {
@@ -225,7 +226,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
       <GameIntroDialog
         isOpen={showIntro}
         onClose={() => {
-          localStorage.setItem("eggdle-intro-seen", "1");
+          markIntroSeen("eggdle");
           setShowIntro(false);
         }}
         image={images.eggfather}

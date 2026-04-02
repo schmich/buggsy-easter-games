@@ -11,6 +11,7 @@ import { PUZZLE } from "../../lib/conneggtionsData";
 import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 import { checkGuess, shuffleWords } from "../../lib/conneggtions";
 import { audio, images } from "../../assets";
+import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 export default function Conneggtions() {
   const [remainingWords, setRemainingWords] = useState<string[]>(() =>
@@ -29,7 +30,7 @@ export default function Conneggtions() {
   const [previousGuesses, setPreviousGuesses] = useState<string[]>([]);
   const [gameKey, setGameKey] = useState(0);
   const [showIntro, setShowIntro] = useState(
-    () => !localStorage.getItem("conneggtions-intro-seen")
+    () => !hasSeenIntro("conneggtions")
   );
 
   const showToast = useCallback((msg: string, duration = 1500) => {
@@ -219,7 +220,7 @@ export default function Conneggtions() {
       <GameIntroDialog
         isOpen={showIntro}
         onClose={() => {
-          localStorage.setItem("conneggtions-intro-seen", "1");
+          markIntroSeen("conneggtions");
           setShowIntro(false);
         }}
         image={images.eggfather}
