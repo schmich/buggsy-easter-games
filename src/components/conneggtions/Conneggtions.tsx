@@ -225,7 +225,7 @@ export default function Conneggtions() {
         }}
         image={images.eggfather}
         title="Conneggtions"
-        description="The Eggfather is also a clever thinker. See if you can figure out which eggs go together into which baskets."
+        description="The Eggfather likes to scramble things up a bit. See if you can figure out which eggs go together in which baskets."
       />
     </>
   );
