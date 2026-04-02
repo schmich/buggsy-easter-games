@@ -17,16 +17,6 @@ export default function Layout() {
         className="absolute bottom-0 left-0 w-full opacity-20 pointer-events-none z-[1]"
       />
       <img
-        src={images.eggsGrass}
-        alt=""
-        className="absolute bottom-0 left-0 w-[180px] opacity-80 pointer-events-none z-[2]"
-      />
-      <img
-        src={images.grassBasket}
-        alt=""
-        className="absolute bottom-0 right-0 w-[160px] opacity-80 pointer-events-none z-[2]"
-      />
-      <img
         src={images.bunny}
         alt=""
         className="absolute top-[70px] left-3 w-[60px] opacity-30 pointer-events-none animate-float"

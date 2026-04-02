@@ -22,10 +22,12 @@ export const images = {
   eggfatherLose,
 } as const;
 
-// Preload all images on module load
+// Preload all images on module load — keep references to prevent GC
+const preloadedImages: HTMLImageElement[] = [];
 Object.values(images).forEach((src) => {
   const img = new Image();
   img.src = src;
+  preloadedImages.push(img);
 });
 
 export const audio = {

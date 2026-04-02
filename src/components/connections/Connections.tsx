@@ -9,7 +9,7 @@ import ConnectionsEndDialog from "./ConnectionsEndDialog";
 import { PUZZLE } from "../../lib/connectionsData";
 import type { ConnectionsGroup } from "../../lib/connectionsData";
 import { checkGuess, shuffleWords } from "../../lib/connections";
-import { audio } from "../../assets";
+import { audio, images } from "../../assets";
 
 export default function Connections() {
   const [remainingWords, setRemainingWords] = useState<string[]>(() =>
@@ -139,7 +139,17 @@ export default function Connections() {
 
   return (
     <>
-      <Header title="Connections" />
+      <img
+        src={images.eggsGrass}
+        alt=""
+        className="absolute bottom-0 left-0 w-[180px] opacity-80 pointer-events-none z-[2]"
+      />
+      <img
+        src={images.grassBasket}
+        alt=""
+        className="absolute bottom-0 right-0 w-[160px] opacity-80 pointer-events-none z-[2]"
+      />
+      <Header title="Conneggtions" />
       <Toast message={toast} />
       <div className="flex flex-col items-center flex-1 overflow-y-auto px-4 gap-1.5" style={{ paddingTop: "10vh" }}>
         {/* Solved groups */}

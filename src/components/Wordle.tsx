@@ -8,7 +8,7 @@ import SuccessDialog from "./SuccessDialog";
 import FailureDialog from "./FailureDialog";
 import { evaluateGuess, type LetterResult } from "../lib/wordle";
 import { isValidWord } from "../lib/words";
-import { audio } from "../assets";
+import { audio, images } from "../assets";
 
 const MAX_GUESSES = 6;
 
@@ -176,9 +176,19 @@ export default function Wordle({ targetWord }: WordleProps) {
 
   return (
     <>
-      <Header title="Wordle" />
+      <img
+        src={images.eggsGrass}
+        alt=""
+        className="absolute bottom-[160px] left-0 w-[180px] opacity-80 pointer-events-none z-[1]"
+      />
+      <img
+        src={images.grassBasket}
+        alt=""
+        className="absolute bottom-[120px] right-0 w-[160px] opacity-80 pointer-events-none z-[1]"
+      />
+      <Header title="Eggdle" />
       <Toast message={toast} />
-      <div className="flex flex-col items-center justify-between flex-1 overflow-hidden">
+      <div className="flex flex-col items-center justify-between flex-1 overflow-hidden relative z-10">
         <div className="flex items-center justify-center flex-1 w-full">
           <Grid
             key={gameKey}
