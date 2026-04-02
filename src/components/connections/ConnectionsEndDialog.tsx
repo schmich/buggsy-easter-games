@@ -63,7 +63,7 @@ export default function ConnectionsEndDialog({
               </p>
               {!won && (
                 <p className="text-[#6b4c8a] text-lg mb-4 text-center">
-                  Good thing The Eggfather is merciful
+                  Lucky for you, The Eggfather is merciful
                 </p>
               )}
               {won && <div className="mb-3" />}

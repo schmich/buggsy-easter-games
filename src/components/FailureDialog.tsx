@@ -36,7 +36,7 @@ export default function FailureDialog({ isOpen, onRetry }: FailureDialogProps) {
                 You cracked under pressure!
               </p>
               <p className="text-[#6b4c8a] text-lg mb-6 text-center">
-                Good thing The Eggfather is merciful
+                Lucky for you, The Eggfather is merciful
               </p>
 
               <Button
