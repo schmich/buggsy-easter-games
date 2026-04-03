@@ -1,8 +1,10 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import { images } from "../assets";
+import LoaderOverlay from "./LoaderOverlay";
 
 export default function Layout() {
-  const isLoading = useLocation().pathname === "/";
+  const [loaderDismissed, setLoaderDismissed] = useState(false);
 
   return (
     <div
@@ -18,25 +20,25 @@ export default function Layout() {
         alt=""
         className="absolute bottom-0 left-0 w-full opacity-20 pointer-events-none z-[1]"
       />
-      {!isLoading && (
-        <>
-          <img
-            src={images.bunny}
-            alt=""
-            className="absolute top-[70px] left-3 w-[60px] opacity-30 pointer-events-none animate-float"
-          />
-          <img
-            src={images.basket}
-            alt=""
-            className="absolute top-[70px] right-3 w-[60px] opacity-30 pointer-events-none animate-float"
-            style={{ animationDelay: "1.5s" }}
-          />
-        </>
-      )}
+      <img
+        src={images.bunny}
+        alt=""
+        className="absolute top-[70px] left-3 w-[60px] opacity-30 pointer-events-none animate-float"
+      />
+      <img
+        src={images.basket}
+        alt=""
+        className="absolute top-[70px] right-3 w-[60px] opacity-30 pointer-events-none animate-float"
+        style={{ animationDelay: "1.5s" }}
+      />
 
-      <div className="flex flex-col flex-1 overflow-hidden relative z-10">
-        <Outlet />
-      </div>
+      {loaderDismissed ? (
+        <div className="flex flex-col flex-1 overflow-hidden relative z-10">
+          <Outlet />
+        </div>
+      ) : (
+        <LoaderOverlay isOpen onDismiss={() => setLoaderDismissed(true)} />
+      )}
     </div>
   );
 }
