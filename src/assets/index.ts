@@ -18,6 +18,7 @@ import announcerIntro from "./announcer-intro.mp3";
 import announcerEggdle from "./announcer-eggdle.mp3";
 import announcerConneggtions from "./announcer-conneggtions.mp3";
 import bugsyAintItChief from "./bugsy-aint-it-chief.mp3";
+import click from "./click.mp3";
 import bgMusic1 from "./background-music-1.mp3";
 import bgMusic2 from "./background-music-2.mp3";
 
@@ -88,6 +89,21 @@ export function startBackgroundMusic() {
   playNextBgTrack();
 }
 
+// Click sound pool for overlapping key presses
+const clickPool = Array.from({ length: 5 }, () => {
+  const a = new Audio(click);
+  a.volume = 0.5;
+  return a;
+});
+let clickIndex = 0;
+
+export function playClick() {
+  const clip = clickPool[clickIndex % clickPool.length];
+  clickIndex++;
+  clip.currentTime = 0;
+  clip.play();
+}
+
 // Failed guess audio set — shuffled, cycles through all
 const failedClips = [
   new Audio(bugsySwingMiss),
@@ -113,7 +129,7 @@ export function playFailedAudio() {
   clip.play();
 }
 
-const allAudio = [...Object.values(audio), ...failedClips, ...bgTracks];
+const allAudio = [...Object.values(audio), ...failedClips, ...bgTracks, ...clickPool];
 
 export const assetsReady: Promise<void> = Promise.all([
   ...Object.values(images).map(preloadImage),

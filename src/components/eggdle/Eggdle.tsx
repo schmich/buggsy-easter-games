@@ -9,7 +9,7 @@ import FailureDialog from "./FailureDialog";
 import GameIntroDialog from "../GameIntroDialog";
 import { evaluateGuess, type LetterResult } from "../../lib/eggdle";
 import { isValidWord } from "../../lib/words";
-import { audio, images, playFailedAudio } from "../../assets";
+import { audio, images, playFailedAudio, playClick } from "../../assets";
 import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 const MAX_GUESSES = 6;
@@ -172,8 +172,10 @@ export default function Eggdle({ targetWord }: EggdleProps) {
       if (key === "ENTER") {
         submitGuess();
       } else if (key === "BACKSPACE") {
+        playClick();
         setCurrentGuess((prev) => prev.slice(0, -1));
       } else if (/^[A-Z]$/.test(key) && currentGuessRef.current.length < wordLength) {
+        playClick();
         setCurrentGuess(currentGuessRef.current + key);
       }
     },
