@@ -27,6 +27,9 @@ import click from "./click.mp3";
 import bgMusic1 from "./background-music-1.mp3";
 import bgMusic2 from "./background-music-2.mp3";
 import bgMusic3 from "./background-music-3.mp3";
+import bgMusic4 from "./background-music-4.mp3";
+import bgMusic5 from "./background-music-5.mp3";
+import bgMusic6 from "./background-music-6.mp3";
 
 export const images = {
   bunny,
@@ -79,13 +82,13 @@ export const audio = {
 } as const;
 
 // Background music — shuffled once, then looped in that order
-const bgTracks = shuffle([new Audio(bgMusic1), new Audio(bgMusic2), new Audio(bgMusic3)]);
+const bgTracks = shuffle([new Audio(bgMusic1), new Audio(bgMusic2), new Audio(bgMusic3), new Audio(bgMusic4), new Audio(bgMusic5), new Audio(bgMusic6)]);
 let bgTrackIndex = 0;
 let bgStarted = false;
 
 function playNextBgTrack() {
   const track = bgTracks[bgTrackIndex % bgTracks.length];
-  track.volume = 0.1;
+  track.volume = 0.05;
   track.currentTime = 0;
   track.onended = () => {
     bgTrackIndex++;
