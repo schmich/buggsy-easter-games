@@ -234,9 +234,9 @@ export default function Conneggtions() {
           markIntroSeen("conneggtions");
           setShowIntro(false);
         }}
-        image={images.bugsyConneggtionsIntro}
+        image={images.buggsyConneggtionsIntro}
         title="Conneggtions"
-        description="Bugsy likes to scramble things up. Sixteen words. Four baskets. Nothing over easy here. Find the conneggtions if you can."
+        description="Buggsy likes to scramble things up. Sixteen words. Four baskets. Nothing over easy here. Find the conneggtions if you can."
       />
     </>
   );

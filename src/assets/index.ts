@@ -4,12 +4,12 @@ import basket from "./basket.webp";
 import grass from "./grass.webp";
 import eggsGrass from "./eggs-grass.webp";
 import grassBasket from "./grass-basket.webp";
-import bugsy from "./bugsy.webp";
-import bugsyWin from "./bugsy-win.webp";
-import bugsyLose from "./bugsy-lose.webp";
-import bugsyEggdleIntro from "./bugsy-eggdle-intro.webp";
-import bugsyConneggtionsIntro from "./bugsy-conneggtions-intro.webp";
-import bugsyEggdleWinImg from "./bugsy-eggdle-win.webp";
+import buggsy from "./buggsy.webp";
+import buggsyWin from "./buggsy-win.webp";
+import buggsyLose from "./buggsy-lose.webp";
+import buggsyEggdleIntro from "./buggsy-eggdle-intro.webp";
+import buggsyConneggtionsIntro from "./buggsy-conneggtions-intro.webp";
+import buggsyEggdleWinImg from "./buggsy-eggdle-win.webp";
 import title from "./title.webp";
 import banner from "./banner.webp";
 import jellyBeans from "./jelly-beans.webp";
@@ -17,13 +17,13 @@ import chocolateBunny from "./chocolate-bunny.webp";
 import peep from "./peep.webp";
 
 // Audio
-import bugsyEggdleWin from "./bugsy-eggdle-win.mp3";
-import bugsySwingMiss from "./bugsy-swing-miss.mp3";
-import bugsyIntro from "./bugsy-intro.mp3";
+import buggsyEggdleWin from "./buggsy-eggdle-win.mp3";
+import buggsySwingMiss from "./buggsy-swing-miss.mp3";
+import buggsyIntro from "./buggsy-intro.mp3";
 import announcerIntro from "./announcer-intro.mp3";
 import announcerEggdle from "./announcer-eggdle.mp3";
 import announcerConneggtions from "./announcer-conneggtions.mp3";
-import bugsyAintItChief from "./bugsy-aint-it-chief.mp3";
+import buggsyAintItChief from "./buggsy-aint-it-chief.mp3";
 import click from "./click.mp3";
 import continueSound from "./continue.mp3";
 import enterSound from "./enter.mp3";
@@ -41,12 +41,12 @@ export const images = {
   grass,
   eggsGrass,
   grassBasket,
-  bugsy,
-  bugsyWin,
-  bugsyLose,
-  bugsyEggdleIntro,
-  bugsyConneggtionsIntro,
-  bugsyEggdleWin: bugsyEggdleWinImg,
+  buggsy,
+  buggsyWin,
+  buggsyLose,
+  buggsyEggdleIntro,
+  buggsyConneggtionsIntro,
+  buggsyEggdleWin: buggsyEggdleWinImg,
   title,
   banner,
   jellyBeans,
@@ -79,8 +79,8 @@ function preloadAudio(audioEl: HTMLAudioElement): Promise<void> {
 const preloadedImages: HTMLImageElement[] = [];
 
 export const audio = {
-  bugsyEggdleWin: new Audio(bugsyEggdleWin),
-  bugsyIntro: new Audio(bugsyIntro),
+  buggsyEggdleWin: new Audio(buggsyEggdleWin),
+  buggsyIntro: new Audio(buggsyIntro),
   announcerIntro: new Audio(announcerIntro),
   announcerEggdle: new Audio(announcerEggdle),
   announcerConneggtions: new Audio(announcerConneggtions),
@@ -175,8 +175,8 @@ export function playError() {
 
 // Failed guess audio set — shuffled, cycles through all
 const failedClips = [
-  new Audio(bugsySwingMiss),
-  new Audio(bugsyAintItChief),
+  new Audio(buggsySwingMiss),
+  new Audio(buggsyAintItChief),
 ];
 
 function shuffle<T>(arr: T[]): T[] {

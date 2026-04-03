@@ -141,8 +141,8 @@ export default function Eggdle({ targetWord }: EggdleProps) {
       // Show success dialog after bounce animation finishes
       setTimeout(() => {
         setShowSuccess(true);
-        audio.bugsyEggdleWin.currentTime = 0;
-        audio.bugsyEggdleWin.play();
+        audio.buggsyEggdleWin.currentTime = 0;
+        audio.buggsyEggdleWin.play();
       }, revealDuration + 1200);
     } else if (isLoss) {
       setTimeout(() => {
@@ -259,9 +259,9 @@ export default function Eggdle({ targetWord }: EggdleProps) {
           markIntroSeen("eggdle");
           setShowIntro(false);
         }}
-        image={images.bugsyEggdleIntro}
+        image={images.buggsyEggdleIntro}
         title="Eggdle"
-        description="Don't let the suit fool you: Bugsy does crossword puzzles in ink. He's chosen a word. You get six guesses. Crack it, or get cracked."
+        description="Don't let the suit fool you: Buggsy does crossword puzzles in ink. He's chosen a word. You get six guesses. Crack it, or get cracked."
       />
     </>
   );

@@ -9,9 +9,9 @@ export default function Intro() {
 
   useEffect(() => {
     const t = setTimeout(() => {
-      audio.bugsyIntro.currentTime = 0;
-      audio.bugsyIntro.play();
-      audio.bugsyIntro.onended = () => {
+      audio.buggsyIntro.currentTime = 0;
+      audio.buggsyIntro.play();
+      audio.buggsyIntro.onended = () => {
         setTimeout(() => {
           audio.announcerIntro.currentTime = 0;
           audio.announcerIntro.play();
@@ -33,20 +33,20 @@ export default function Intro() {
 
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               <img
-                src={images.bugsy}
+                src={images.buggsy}
                 alt=""
                 className="h-40 w-auto"
               />
               <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b4c8a] to-transparent mb-3" />
 
               <h1 className="text-[#6b4c8a] text-2xl text-center mb-3">
-                Welcome to Bugsy Bunnelli's
+                Welcome to Buggsy Bunnelli's
                 <br />
                 2026 Easter Games
               </h1>
 
               <p className="text-[#6b4c8a] text-lg text-center mb-6 leading-relaxed">
-                You are about to embark on a series of high-stakes games. Stay sharp, stay clever, and whatever you do, don't disappoint Bugsy. Godspeed, egg hunter.
+                You are about to embark on a series of high-stakes games. Stay sharp, stay clever, and whatever you do, don't disappoint Buggsy. Godspeed, egg hunter.
               </p>
 
               {/* Egg divider */}

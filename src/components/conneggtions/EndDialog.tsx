@@ -43,7 +43,7 @@ export default function EndDialog({
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               {/* Bunny image */}
               <img
-                src={won ? images.bugsyWin : images.bugsyLose}
+                src={won ? images.buggsyWin : images.buggsyLose}
                 alt=""
                 className="h-40 w-auto"
               />
@@ -63,7 +63,7 @@ export default function EndDialog({
               </p>
               {!won && (
                 <p className="text-[#6b4c8a] text-lg mb-4 text-center">
-                  Lucky for you, Bugsy is merciful
+                  Lucky for you, Buggsy is merciful
                 </p>
               )}
               {won && <div className="mb-3" />}
