@@ -10,6 +10,8 @@ import bugsyLose from "./bugsy-lose.webp";
 import bugsyEggdleIntro from "./bugsy-eggdle-intro.webp";
 import bugsyConneggtionsIntro from "./bugsy-conneggtions-intro.webp";
 import bugsyEggdleWinImg from "./bugsy-eggdle-win.webp";
+import title from "./title.webp";
+import banner from "./banner.webp";
 
 // Audio
 import bugsyEggdleWin from "./bugsy-eggdle-win.mp3";
@@ -36,6 +38,8 @@ export const images = {
   bugsyEggdleIntro,
   bugsyConneggtionsIntro,
   bugsyEggdleWin: bugsyEggdleWinImg,
+  title,
+  banner,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Modal, Button, useOverlayState } from "@heroui/react";
-import { assetsReady, isMuted, toggleMuted, onMuteChange } from "../assets";
+import { assetsReady, images, isMuted, toggleMuted, onMuteChange } from "../assets";
 
 interface LoaderOverlayProps {
   isOpen: boolean;
@@ -56,7 +56,7 @@ export default function LoaderOverlay({ isOpen, onDismiss }: LoaderOverlayProps)
           <Modal.Dialog className="bg-white rounded-2xl shadow-2xl p-0 overflow-hidden border-2 border-[#e8d5f0]">
             <div className="h-3 w-full animate-gradient-cycle" style={{ background: "linear-gradient(90deg, #f6c443, #77c572, #b07fd0, #7eb8da, #f6c443)", backgroundSize: "200% 100%" }} />
 
-            <div className="flex flex-col items-center px-8 py-10">
+            <div className="flex flex-col items-center px-8 py-8">
               {!loaded ? (
                 <div
                   className={`w-48 h-2 bg-[#e8d5f0] rounded-full overflow-hidden transition-opacity duration-250 ${
@@ -66,10 +66,14 @@ export default function LoaderOverlay({ isOpen, onDismiss }: LoaderOverlayProps)
                   <div className="h-full bg-gradient-to-r from-[#6b4c8a] to-[#b07fd0] rounded-full animate-loading-bar" />
                 </div>
               ) : (
-                <div className={`flex flex-col items-center gap-8 w-64 transition-all duration-250 ${
+                <div className={`flex flex-col items-center transition-all duration-250 -mx-8 ${
                   showButton ? "opacity-100 scale-100" : "opacity-0 scale-95"
                 }`}>
-                  <div className="flex flex-col gap-3 w-full">
+                  <div className="relative w-full -mt-8">
+                    <img src={images.title} alt="2026 Easter Games" className="w-full" />
+                    <img src={images.banner} alt="The 2026 Easter Games" className="absolute bottom-[10%] left-1/2 -translate-x-1/2 translate-y-1/2 w-3/4" />
+                  </div>
+                  <div className="flex flex-col gap-3 w-64 mt-20">
                     <Button
                       onPress={toggleFullscreen}
                       className="bg-gradient-to-r from-[#7eb8da] to-[#a0d0ef] text-white text-base w-full py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2"
@@ -113,7 +117,7 @@ export default function LoaderOverlay({ isOpen, onDismiss }: LoaderOverlayProps)
                   </div>
                   <Button
                     onPress={onDismiss}
-                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-full py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
+                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-64 mt-8 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
                   >
                     Continue
                   </Button>
