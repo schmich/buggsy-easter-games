@@ -6,7 +6,7 @@ export default function MistakeIndicator({ remaining }: MistakeIndicatorProps) {
   return (
     <div className="flex items-center gap-2 my-3">
       <span
-        className="text-base text-[#6b4c8a]/70"
+        className="text-base text-[#6b4c8a] font-medium"
 
       >
         Mistakes remaining:
