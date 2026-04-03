@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button, useOverlayState } from "@heroui/react";
 import { images, audio } from "../assets";
@@ -9,11 +9,32 @@ export default function Intro() {
 
   useEffect(() => {
     audio.introMusic.currentTime = 0;
+    audio.introMusic.volume = 1;
     audio.introMusic.play();
-    return () => {
-      audio.introMusic.pause();
-    };
   }, []);
+
+  const handleContinue = useCallback(() => {
+    navigate("/eggdle");
+    const music = audio.introMusic;
+    const duration = 2000;
+    const steps = 40;
+    const interval = duration / steps;
+    let step = 0;
+    const fadeOut = setInterval(() => {
+      step++;
+      const t = step / steps;
+      // Cubic ease-in: volume drops fast then tapers slowly
+      const volume = Math.pow(1 - t, 3);
+      if (step >= steps) {
+        music.volume = 0;
+        music.pause();
+        music.volume = 1;
+        clearInterval(fadeOut);
+      } else {
+        music.volume = Math.max(0, volume);
+      }
+    }, interval);
+  }, [navigate]);
 
   return (
     <Modal state={state}>
@@ -57,7 +78,7 @@ export default function Intro() {
               </div>
 
               <Button
-                onPress={() => navigate("/eggdle")}
+                onPress={handleContinue}
                 className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
               >
                 Let's Go 🐰
