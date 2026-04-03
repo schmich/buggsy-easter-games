@@ -1,5 +1,5 @@
 import { Modal, Button, useOverlayState } from "@heroui/react";
-import { playEnter } from "../assets";
+import { playContinue } from "../assets";
 
 interface GameIntroDialogProps {
   isOpen: boolean;
@@ -44,7 +44,7 @@ export default function GameIntroDialog({
               </p>
 
               <Button
-                onPress={() => { playEnter(); onClose(); }}
+                onPress={() => { playContinue(); onClose(); }}
                 className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
               >
                 Continue

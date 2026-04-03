@@ -25,7 +25,7 @@ import announcerEggdle from "./announcer-eggdle.mp3";
 import announcerConneggtions from "./announcer-conneggtions.mp3";
 import bugsyAintItChief from "./bugsy-aint-it-chief.mp3";
 import click from "./click.mp3";
-import enter from "./enter.mp3";
+import continueSound from "./continue.mp3";
 import error from "./error.mp3";
 import bgMusic1 from "./background-music-1.mp3";
 import bgMusic2 from "./background-music-2.mp3";
@@ -149,12 +149,12 @@ export function playClick() {
   source.start(0);
 }
 
-const enterSound = new Audio(enter);
+const continueSfx = new Audio(continueSound);
 
-export function playEnter() {
+export function playContinue() {
   if (soundsMuted) return;
-  enterSound.currentTime = 0;
-  enterSound.play();
+  continueSfx.currentTime = 0;
+  continueSfx.play();
 }
 
 const errorSound = new Audio(error);
@@ -191,7 +191,7 @@ export function playFailedAudio() {
   clip.play();
 }
 
-const soundClips = [...Object.values(audio), ...failedClips, enterSound, errorSound];
+const soundClips = [...Object.values(audio), ...failedClips, continueSfx, errorSound];
 
 const soundsListeners = new Set<(muted: boolean) => void>();
 const musicListeners = new Set<(muted: boolean) => void>();

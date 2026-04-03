@@ -1,5 +1,5 @@
 import { Modal, useOverlayState } from "@heroui/react";
-import { images, playEnter } from "../../assets";
+import { images, playContinue } from "../../assets";
 
 interface SuccessDialogProps {
   isOpen: boolean;
@@ -72,7 +72,7 @@ export default function SuccessDialog({
               </p>
 
               <button
-                onClick={() => { playEnter(); onNext(); }}
+                onClick={() => { playContinue(); onNext(); }}
                 className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-all cursor-pointer"
               >
                 Bring It On 🐰
