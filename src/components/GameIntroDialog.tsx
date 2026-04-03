@@ -24,7 +24,7 @@ export default function GameIntroDialog({
         className="bg-black/30 backdrop-blur-sm"
       >
         <Modal.Container placement="center" size="sm">
-          <Modal.Dialog className="bg-white rounded-2xl shadow-2xl p-0 overflow-hidden ">
+          <Modal.Dialog className="bg-white rounded-2xl p-0 overflow-hidden animate-shadow-cycle">
             <div className="h-3 w-full animate-gradient-cycle" style={{ background: "linear-gradient(90deg, #f6c443, #77c572, #b07fd0, #7eb8da, #f6c443)", backgroundSize: "200% 100%" }} />
 
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
