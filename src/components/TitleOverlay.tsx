@@ -2,13 +2,13 @@ import { useState, useEffect, useCallback } from "react";
 import { Modal, Button, useOverlayState } from "@heroui/react";
 import { assetsReady, images, isMuted, toggleMuted, onMuteChange } from "../assets";
 
-interface LoaderOverlayProps {
+interface TitleOverlayProps {
   isOpen: boolean;
   onDismiss: () => void;
   onLoaded?: () => void;
 }
 
-export default function LoaderOverlay({ isOpen, onDismiss, onLoaded }: LoaderOverlayProps) {
+export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverlayProps) {
   const state = useOverlayState({ isOpen, onOpenChange: () => {} });
   const [loaded, setLoaded] = useState(false);
   const [fadingOut, setFadingOut] = useState(false);
