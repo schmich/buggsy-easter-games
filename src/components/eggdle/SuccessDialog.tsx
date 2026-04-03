@@ -43,7 +43,7 @@ export default function SuccessDialog({
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               {/* Bunny image */}
               <img
-                src={images.bugsyWin}
+                src={images.bugsyEggdleWin}
                 alt=""
                 className="h-40 w-auto"
               />
