@@ -103,6 +103,10 @@ export function startBackgroundMusic() {
   playNextBgTrack();
 }
 
+// Mute state — declared early so playClick/playFailedAudio can reference it
+let soundsMuted = false;
+let musicMuted = false;
+
 // Click sound via Web Audio API for reliable rapid playback on mobile
 let clickBuffer: AudioBuffer | null = null;
 let audioCtx: AudioContext | null = null;
@@ -122,7 +126,7 @@ fetch(click)
   });
 
 export function playClick() {
-  if (!clickBuffer || muted) return;
+  if (!clickBuffer || soundsMuted) return;
   const ctx = getAudioContext();
   if (ctx.state === "suspended") ctx.resume();
   const source = ctx.createBufferSource();
@@ -152,47 +156,65 @@ const failedQueue: HTMLAudioElement[] = shuffle(failedClips);
 let failedIndex = 0;
 
 export function playFailedAudio() {
+  if (soundsMuted) return;
   const clip = failedQueue[failedIndex % failedQueue.length];
   failedIndex++;
   clip.currentTime = 0;
   clip.play();
 }
 
-const allAudio = [...Object.values(audio), ...failedClips, ...bgTracks];
+const soundClips = [...Object.values(audio), ...failedClips];
 
-// Global sound mute
-let muted = false;
-const muteListeners = new Set<(muted: boolean) => void>();
+const soundsListeners = new Set<(muted: boolean) => void>();
+const musicListeners = new Set<(muted: boolean) => void>();
 
-export function isMuted() {
-  return muted;
+export function isSoundsMuted() {
+  return soundsMuted;
 }
 
-export function setMuted(value: boolean) {
-  muted = value;
-  // Mute/unmute all HTMLAudioElement instances
-  for (const el of allAudio) {
+export function isMusicMuted() {
+  return musicMuted;
+}
+
+export function setSoundsMuted(value: boolean) {
+  soundsMuted = value;
+  for (const el of soundClips) {
     el.muted = value;
   }
-  // Suspend/resume Web Audio context (click sounds)
   if (audioCtx) {
     if (value) audioCtx.suspend();
     else audioCtx.resume();
   }
-  muteListeners.forEach((fn) => fn(value));
+  soundsListeners.forEach((fn) => fn(value));
 }
 
-export function toggleMuted() {
-  setMuted(!muted);
-  return muted;
+export function setMusicMuted(value: boolean) {
+  musicMuted = value;
+  for (const el of bgTracks) {
+    el.muted = value;
+  }
+  musicListeners.forEach((fn) => fn(value));
 }
 
-export function onMuteChange(fn: (muted: boolean) => void) {
-  muteListeners.add(fn);
-  return () => { muteListeners.delete(fn); };
+export function toggleSoundsMuted() {
+  setSoundsMuted(!soundsMuted);
+}
+
+export function toggleMusicMuted() {
+  setMusicMuted(!musicMuted);
+}
+
+export function onSoundsChange(fn: (muted: boolean) => void) {
+  soundsListeners.add(fn);
+  return () => { soundsListeners.delete(fn); };
+}
+
+export function onMusicChange(fn: (muted: boolean) => void) {
+  musicListeners.add(fn);
+  return () => { musicListeners.delete(fn); };
 }
 
 export const assetsReady: Promise<void> = Promise.all([
   ...Object.values(images).map(preloadImage),
-  ...allAudio.map(preloadAudio),
+  ...[...soundClips, ...bgTracks].map(preloadAudio),
 ]).then(() => {});
