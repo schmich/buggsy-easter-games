@@ -92,19 +92,34 @@ export function startBackgroundMusic() {
   playNextBgTrack();
 }
 
-// Click sound pool for overlapping key presses
-const clickPool = Array.from({ length: 5 }, () => {
-  const a = new Audio(click);
-  a.volume = 0.5;
-  return a;
-});
-let clickIndex = 0;
+// Click sound via Web Audio API for reliable rapid playback on mobile
+let clickBuffer: AudioBuffer | null = null;
+let audioCtx: AudioContext | null = null;
+
+function getAudioContext(): AudioContext {
+  if (!audioCtx) {
+    audioCtx = new AudioContext();
+  }
+  return audioCtx;
+}
+
+fetch(click)
+  .then((res) => res.arrayBuffer())
+  .then((buf) => getAudioContext().decodeAudioData(buf))
+  .then((decoded) => {
+    clickBuffer = decoded;
+  });
 
 export function playClick() {
-  const clip = clickPool[clickIndex % clickPool.length];
-  clickIndex++;
-  clip.currentTime = 0;
-  clip.play();
+  if (!clickBuffer) return;
+  const ctx = getAudioContext();
+  if (ctx.state === "suspended") ctx.resume();
+  const source = ctx.createBufferSource();
+  source.buffer = clickBuffer;
+  const gain = ctx.createGain();
+  gain.gain.value = 0.5;
+  source.connect(gain).connect(ctx.destination);
+  source.start(0);
 }
 
 // Failed guess audio set — shuffled, cycles through all
@@ -132,7 +147,7 @@ export function playFailedAudio() {
   clip.play();
 }
 
-const allAudio = [...Object.values(audio), ...failedClips, ...bgTracks, ...clickPool];
+const allAudio = [...Object.values(audio), ...failedClips, ...bgTracks];
 
 export const assetsReady: Promise<void> = Promise.all([
   ...Object.values(images).map(preloadImage),

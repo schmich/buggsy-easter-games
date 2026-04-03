@@ -231,7 +231,7 @@ export default function Conneggtions() {
         }}
         image={images.bugsyConneggtionsIntro}
         title="Conneggtions"
-        description="Bugsy likes to scramble things up. 16 words. 4 baskets. Nothing over easy here. Find the conneggtions if you can."
+        description="Bugsy likes to scramble things up. Sixteen words. Four baskets. Nothing over easy here. Find the conneggtions if you can."
       />
     </>
   );
