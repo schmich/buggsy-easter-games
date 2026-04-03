@@ -83,10 +83,10 @@ export default function EndDialog({
                             color: colors.text,
                           }}
                         >
-                          <p className="text-sm uppercase">
+                          <p className="text-base uppercase">
                             {group.category}
                           </p>
-                          <p className="text-xs mt-0.5 opacity-80">
+                          <p className="text-sm mt-0.5 opacity-80">
                             {group.words.join(", ")}
                           </p>
                         </div>

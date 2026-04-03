@@ -16,8 +16,8 @@ export const PUZZLE: ConneggtionsPuzzle = {
       difficulty: 0,
     },
     {
-      category: "Easter Symbols",
-      words: ["BUNNY", "LAMB", "LILY", "CROSS"],
+      category: "____ Basket",
+      words: ["BREAD", "LAUNDRY", "EASTER", "PICNIC"],
       difficulty: 1,
     },
     {
@@ -26,8 +26,8 @@ export const PUZZLE: ConneggtionsPuzzle = {
       difficulty: 2,
     },
     {
-      category: "____ Basket",
-      words: ["BREAD", "LAUNDRY", "EASTER", "PICNIC"],
+      category: "Easter Symbols",
+      words: ["BUNNY", "LAMB", "LILY", "CROSS"],
       difficulty: 3,
     },
   ],
