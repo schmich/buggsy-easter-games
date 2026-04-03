@@ -12,6 +12,8 @@ import bugsyConneggtionsIntro from "./bugsy-conneggtions-intro.webp";
 import bugsyEggdleWinImg from "./bugsy-eggdle-win.webp";
 import title from "./title.webp";
 import banner from "./banner.webp";
+import jellyBeans from "./jelly-beans.webp";
+import chocolateBunny from "./chocolate-bunny.webp";
 
 // Audio
 import bugsyEggdleWin from "./bugsy-eggdle-win.mp3";
@@ -40,6 +42,8 @@ export const images = {
   bugsyEggdleWin: bugsyEggdleWinImg,
   title,
   banner,
+  jellyBeans,
+  chocolateBunny,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded

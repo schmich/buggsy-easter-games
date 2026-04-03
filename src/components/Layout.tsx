@@ -20,24 +20,17 @@ export default function Layout() {
         alt=""
         className="absolute bottom-0 left-0 w-full opacity-20 pointer-events-none z-[1]"
       />
-      <img
-        src={images.bunny}
-        alt=""
-        className="absolute top-[70px] left-3 w-[60px] opacity-30 pointer-events-none animate-float"
-      />
-      <img
-        src={images.basket}
-        alt=""
-        className="absolute top-[70px] right-3 w-[60px] opacity-30 pointer-events-none animate-float"
-        style={{ animationDelay: "1.5s" }}
-      />
 
       {loaderDismissed ? (
         <div className="flex flex-col flex-1 overflow-hidden relative z-10">
           <Outlet />
         </div>
       ) : (
-        <LoaderOverlay isOpen onDismiss={() => { startBackgroundMusic(); setLoaderDismissed(true); }} />
+        <>
+          <LoaderOverlay isOpen onDismiss={() => { startBackgroundMusic(); setLoaderDismissed(true); }} />
+          <img src={images.jellyBeans} alt="" className="fixed top-1/2 left-1/2 w-36 -rotate-12 pointer-events-none z-[9999]" style={{ marginLeft: "-240px", marginTop: "200px" }} />
+          <img src={images.chocolateBunny} alt="" className="fixed top-1/2 left-1/2 w-32 rotate-12 pointer-events-none z-[9999]" style={{ marginLeft: "110px", marginTop: "150px" }} />
+        </>
       )}
     </div>
   );

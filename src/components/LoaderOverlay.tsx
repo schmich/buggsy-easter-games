@@ -117,7 +117,7 @@ export default function LoaderOverlay({ isOpen, onDismiss }: LoaderOverlayProps)
                   </div>
                   <Button
                     onPress={onDismiss}
-                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-64 mt-14 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
+                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-64 mt-10 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
                   >
                     Continue
                   </Button>
