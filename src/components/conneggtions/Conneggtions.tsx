@@ -222,9 +222,9 @@ export default function Conneggtions() {
           markIntroSeen("conneggtions");
           setShowIntro(false);
         }}
-        image={images.eggfatherConneggtions}
+        image={images.bugsyConneggtions}
         title="Conneggtions"
-        description="The Eggfather likes to scramble things up a bit. See if you can figure out which eggs go together in which baskets."
+        description="Bugsy likes to scramble things up a bit. See if you can figure out which eggs go together in which baskets."
       />
     </>
   );

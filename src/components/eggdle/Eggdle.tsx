@@ -125,14 +125,14 @@ export default function Eggdle({ targetWord }: EggdleProps) {
       setTimeout(() => {
         setShowSuccess(true);
         setAudioProgress(0);
-        audio.eggdleWin.currentTime = 0;
-        audio.eggdleWin.play();
+        audio.bugsyEggdleWin.currentTime = 0;
+        audio.bugsyEggdleWin.play();
         const updateProgress = () => {
-          const { currentTime, duration } = audio.eggdleWin;
+          const { currentTime, duration } = audio.bugsyEggdleWin;
           if (duration > 0) {
             setAudioProgress(currentTime / duration);
           }
-          if (!audio.eggdleWin.ended) {
+          if (!audio.bugsyEggdleWin.ended) {
             audioRafRef.current = requestAnimationFrame(updateProgress);
           } else {
             setAudioProgress(1);
@@ -251,9 +251,9 @@ export default function Eggdle({ targetWord }: EggdleProps) {
           markIntroSeen("eggdle");
           setShowIntro(false);
         }}
-        image={images.eggfatherEggdle}
+        image={images.bugsyEggdle}
         title="Eggdle"
-        description="Little do people know, The Eggfather is quite the wordsmith. See if you can crack his secret word."
+        description="Don't let the suit fool you: Bugsy does crossword puzzles in ink. He's chosen a word. You get six guesses. The family is watching."
       />
     </>
   );

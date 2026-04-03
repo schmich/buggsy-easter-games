@@ -26,7 +26,7 @@ export default function FailureDialog({ isOpen, onRetry }: FailureDialogProps) {
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               {/* Bunny image */}
               <img
-                src={images.eggfatherLose}
+                src={images.bugsyLose}
                 alt=""
                 className="h-40 w-auto"
               />
@@ -36,7 +36,7 @@ export default function FailureDialog({ isOpen, onRetry }: FailureDialogProps) {
                 You cracked under pressure!
               </p>
               <p className="text-[#6b4c8a] text-lg mb-6 text-center">
-                Lucky for you, The Eggfather is merciful
+                Lucky for you, Bugsy is merciful
               </p>
 
               <Button

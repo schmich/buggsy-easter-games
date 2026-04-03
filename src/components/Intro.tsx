@@ -9,8 +9,19 @@ export default function Intro() {
 
   useEffect(() => {
     audio.introMusic.currentTime = 0;
-    audio.introMusic.volume = 1;
+    audio.introMusic.volume = 0.75;
     audio.introMusic.play();
+    const t = setTimeout(() => {
+      audio.bugsyIntro.currentTime = 0;
+      audio.bugsyIntro.play();
+      audio.bugsyIntro.onended = () => {
+        setTimeout(() => {
+          audio.announcerIntro.currentTime = 0;
+          audio.announcerIntro.play();
+        }, 1000);
+      };
+    }, 1000);
+    return () => clearTimeout(t);
   }, []);
 
   const handleContinue = useCallback(() => {
@@ -24,7 +35,7 @@ export default function Intro() {
       step++;
       const t = step / steps;
       // Cubic ease-in: volume drops fast then tapers slowly
-      const volume = Math.pow(1 - t, 3);
+      const volume = 0.75 * Math.pow(1 - t, 3);
       if (step >= steps) {
         music.volume = 0;
         music.pause();
@@ -48,20 +59,20 @@ export default function Intro() {
 
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               <img
-                src={images.eggfather}
+                src={images.bugsy}
                 alt=""
                 className="h-40 w-auto"
               />
               <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b4c8a] to-transparent mb-3" />
 
               <h1 className="text-[#6b4c8a] text-2xl text-center mb-3">
-                Welcome to The Eggfather's
+                Welcome to Bugsy Bunnelli's
                 <br />
-                Easter Games 2026
+                2026 Easter Games
               </h1>
 
               <p className="text-[#6b4c8a] text-lg text-center mb-6 leading-relaxed">
-                You are about to embark on a series of high-stakes games. Stay sharp, stay clever, and whatever you do, don't disappoint The Eggfather. If you're lucky, there might even be a prize at the end.
+                You are about to embark on a series of high-stakes games. Stay sharp, stay clever, and whatever you do, don't disappoint Bugsy. If you're lucky, there might even be a prize at the end.
               </p>
 
               {/* Egg divider */}

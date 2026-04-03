@@ -4,17 +4,19 @@ import basket from "./basket.webp";
 import grass from "./grass.webp";
 import eggsGrass from "./eggs-grass.webp";
 import grassBasket from "./grass-basket.webp";
-import eggfather from "./eggfather.webp";
-import eggfatherWin from "./eggfather-win.webp";
-import eggfatherLose from "./eggfather-lose.webp";
-import eggfatherEggdle from "./eggfather-eggdle.webp";
-import eggfatherConneggtions from "./eggfather-coneggtions.webp";
+import bugsy from "./bugsy.webp";
+import bugsyWin from "./bugsy-win.webp";
+import bugsyLose from "./bugsy-lose.webp";
+import bugsyEggdle from "./bugsy-eggdle.webp";
+import bugsyConneggtions from "./bugsy-conneggtions.webp";
 
 // Audio
-import eggdleWin from "./eggfather-eggdle-win.mp3";
+import bugsyEggdleWin from "./bugsy-eggdle-win.mp3";
 import introMusic from "./intro-music.mp3";
-import swingMiss from "./eggfather-swing-miss.mp3";
-import aintItChief from "./eggfather-aint-it-chief.mp3";
+import bugsySwingMiss from "./bugsy-swing-miss.mp3";
+import bugsyIntro from "./bugsy-intro.mp3";
+import announcerIntro from "./announcer-intro.mp3";
+import bugsyAintItChief from "./bugsy-aint-it-chief.mp3";
 
 export const images = {
   bunny,
@@ -22,11 +24,11 @@ export const images = {
   grass,
   eggsGrass,
   grassBasket,
-  eggfather,
-  eggfatherWin,
-  eggfatherLose,
-  eggfatherEggdle,
-  eggfatherConneggtions,
+  bugsy,
+  bugsyWin,
+  bugsyLose,
+  bugsyEggdle,
+  bugsyConneggtions,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded
@@ -54,14 +56,16 @@ function preloadAudio(audioEl: HTMLAudioElement): Promise<void> {
 const preloadedImages: HTMLImageElement[] = [];
 
 export const audio = {
-  eggdleWin: new Audio(eggdleWin),
+  bugsyEggdleWin: new Audio(bugsyEggdleWin),
   introMusic: new Audio(introMusic),
+  bugsyIntro: new Audio(bugsyIntro),
+  announcerIntro: new Audio(announcerIntro),
 } as const;
 
-// Failed guess audio set — shuffled, cycles through all before reshuffling
+// Failed guess audio set — shuffled, cycles through all
 const failedClips = [
-  new Audio(swingMiss),
-  new Audio(aintItChief),
+  new Audio(bugsySwingMiss),
+  new Audio(bugsyAintItChief),
 ];
 
 function shuffle<T>(arr: T[]): T[] {
