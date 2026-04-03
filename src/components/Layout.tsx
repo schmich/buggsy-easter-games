@@ -30,7 +30,7 @@ export default function Layout() {
         <>
           <TitleOverlay isOpen onLoaded={() => setAssetsLoaded(true)} onDismiss={() => { startBackgroundMusic(); setTitleDismissed(true); }} />
           {assetsLoaded && <>
-            <img src={images.jellyBeans} alt="" className="fixed top-1/2 left-1/2 w-36 pointer-events-none z-[9999] animate-wobble-float" style={{ marginLeft: "-240px", marginTop: "200px", "--wobble-base": "-12deg" } as React.CSSProperties} />
+            <img src={images.jellyBeans} alt="" className="fixed top-1/2 left-1/2 w-36 pointer-events-none z-[9999] animate-wobble-float" style={{ marginLeft: "-240px", marginTop: "230px", "--wobble-base": "-12deg" } as React.CSSProperties} />
             <img src={images.chocolateBunny} alt="" className="fixed top-1/2 left-1/2 w-32 pointer-events-none z-[9999] animate-wobble-float" style={{ marginLeft: "110px", marginTop: "150px", "--wobble-base": "12deg", animationDelay: "-3s" } as React.CSSProperties} />
           </>}
         </>

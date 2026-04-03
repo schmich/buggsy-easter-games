@@ -56,9 +56,9 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
         isDismissable={false}
         className="bg-black/10 backdrop-blur-sm"
       >
-        <Modal.Container placement="center" size="sm">
+        <Modal.Container placement="center" size="sm" className="!overflow-visible">
           <Modal.Dialog className="bg-white rounded-2xl p-0 overflow-hidden animate-shadow-cycle">
-            <div className="h-3 w-full animate-gradient-cycle" style={{ background: "linear-gradient(90deg, #f6c443, #77c572, #b07fd0, #7eb8da, #f6c443)", backgroundSize: "200% 100%" }} />
+            <div className="h-3 w-full animate-gradient-cycle rounded-t-2xl" style={{ background: "linear-gradient(90deg, #f6c443, #77c572, #b07fd0, #7eb8da, #f6c443)", backgroundSize: "200% 100%" }} />
 
             <div className="flex flex-col items-center px-8 py-8">
               {!loaded ? (
@@ -75,9 +75,8 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
                 }`}>
                   <div className="relative w-full -mt-8">
                     <img src={images.title} alt="2026 Easter Games" className="w-full" />
-                    <img src={images.banner} alt="The 2026 Easter Games" className="absolute bottom-[10%] left-1/2 -translate-x-1/2 translate-y-1/2 w-3/4" />
                   </div>
-                  <div className="flex flex-col gap-3 w-64 mt-20">
+                  <div className="flex flex-col gap-3 w-64 mt-36">
                     <Button
                       onPress={toggleFullscreen}
                       className="bg-gradient-to-r from-[#7eb8da] to-[#a0d0ef] text-white text-base w-full py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2"
@@ -142,7 +141,7 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
                   </div>
                   <Button
                     onPress={onDismiss}
-                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-64 mt-10 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
+                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-64 mt-4 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
                   >
                     Play
                   </Button>
@@ -150,6 +149,9 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
               )}
             </div>
           </Modal.Dialog>
+          {loaded && showButton && (
+            <img src={images.banner} alt="The 2026 Easter Games" className="absolute left-1/2 -translate-x-1/2 w-[520px] max-w-[110dvw] pointer-events-none" style={{ top: "27%" }} />
+          )}
         </Modal.Container>
       </Modal.Backdrop>
     </Modal>
