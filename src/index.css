@@ -19,6 +19,8 @@ body {
   --animate-gradient-cycle: gradient-cycle 6s linear infinite;
   --animate-shadow-cycle: shadow-cycle 8s ease-in-out infinite;
   --animate-wobble-float: wobble-float 8s ease-in-out infinite;
+  --animate-sun-rays: sun-rays 20s linear infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
   --animate-shrink-away: shrink-away 0.3s ease-in forwards;
   --animate-reveal-pulse: reveal-pulse 0.5s ease-out;
 }
@@ -151,6 +153,24 @@ body {
   100% {
     width: 0%;
     margin-left: 100%;
+  }
+}
+
+@keyframes sun-rays {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
   }
 }
 
