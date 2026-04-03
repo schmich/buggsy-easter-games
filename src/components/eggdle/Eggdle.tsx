@@ -261,7 +261,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
         }}
         image={images.buggsyEggdleIntro}
         title="Eggdle"
-        description="Don't let the suit fool you: Buggsy does crossword puzzles in ink. He's chosen a word. You get six guesses. Crack it, or get cracked."
+        description="Buggsy might have a rough and tough image, but he has brains, too. He does his crossword puzzles in ink. His challenge: he's chosen a word. You get six guesses. Crack it, or get cracked."
       />
     </>
   );
