@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button, useOverlayState } from "@heroui/react";
-import { images, audio, startBackgroundMusic } from "../assets";
+import { images, audio } from "../assets";
 
 export default function Intro() {
   const navigate = useNavigate();
   const state = useOverlayState({ isOpen: true, onOpenChange: () => {} });
 
   useEffect(() => {
-    startBackgroundMusic();
     const t = setTimeout(() => {
       audio.bugsyIntro.currentTime = 0;
       audio.bugsyIntro.play();

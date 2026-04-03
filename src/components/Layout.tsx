@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { images } from "../assets";
+import { images, startBackgroundMusic } from "../assets";
 import LoaderOverlay from "./LoaderOverlay";
 
 export default function Layout() {
@@ -37,7 +37,7 @@ export default function Layout() {
           <Outlet />
         </div>
       ) : (
-        <LoaderOverlay isOpen onDismiss={() => setLoaderDismissed(true)} />
+        <LoaderOverlay isOpen onDismiss={() => { startBackgroundMusic(); setLoaderDismissed(true); }} />
       )}
     </div>
   );

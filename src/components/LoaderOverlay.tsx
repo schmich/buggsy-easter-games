@@ -14,7 +14,7 @@ export default function LoaderOverlay({ isOpen, onDismiss }: LoaderOverlayProps)
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const minDelay = new Promise((r) => setTimeout(r, 2000));
+    const minDelay = new Promise((r) => setTimeout(r, 1000));
     Promise.all([assetsReady, minDelay]).then(() => setFadingOut(true));
   }, []);
 
