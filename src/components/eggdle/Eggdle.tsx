@@ -8,6 +8,7 @@ import Toast from "../Toast";
 import SuccessDialog from "./SuccessDialog";
 import FailureDialog from "./FailureDialog";
 import GameIntroDialog from "../GameIntroDialog";
+import Clouds from "../Clouds";
 import { evaluateGuess, type LetterResult } from "../../lib/eggdle";
 import { isValidWord } from "../../lib/words";
 import { audio, images, playFailedAudio, playClick, playEnter, playError, stopAllVoices } from "../../assets";
@@ -209,6 +210,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
 
   return (
     <>
+      <Clouds />
       <Decorations
         topLeft={{ src: images.jellyBeans, className: "top-[80px] w-[140px]", style: { left: "-5%" } }}
         topRight={{ src: images.chocolateBunny, className: "top-[50px] w-[120px]", style: { right: "-5%" } }}

@@ -8,6 +8,7 @@ import MistakeIndicator from "./MistakeIndicator";
 import EndDialog from "./EndDialog";
 import GameIntroDialog from "../GameIntroDialog";
 import Decorations from "../Decorations";
+import Clouds from "../Clouds";
 import { PUZZLE } from "../../lib/conneggtionsData";
 import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 import { checkGuess, shuffleWords } from "../../lib/conneggtions";
@@ -163,6 +164,7 @@ export default function Conneggtions() {
 
   return (
     <>
+      <Clouds />
       <Decorations
         topLeft={{ src: images.peepChick, className: "top-[60px] w-[140px]", style: { left: "-5%" } }}
         topRight={{ src: images.peepBunny, className: "top-[70px] w-[120px]", style: { right: "-5%" } }}

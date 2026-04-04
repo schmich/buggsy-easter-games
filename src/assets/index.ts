@@ -17,6 +17,11 @@ import peepBunny from "./peep-bunny.webp";
 import eggBorder from "./egg-border.webp";
 import buggsyConneggtionsWinImg from "./buggsy-coneggtions-win.webp";
 import loadingEgg from "./loading-egg.webp";
+import cloud1 from "./cloud-1.webp";
+import cloud2 from "./cloud-2.webp";
+import cloud3 from "./cloud-3.webp";
+import cloud4 from "./cloud-4.webp";
+import cloud5 from "./cloud-5.webp";
 
 // Audio
 import buggsyEggdleWin from "./buggsy-eggdle-win.mp3";
@@ -64,6 +69,7 @@ export const images = {
   eggBorder,
   buggsyConneggtionsWin: buggsyConneggtionsWinImg,
   loadingEgg,
+  clouds: [cloud1, cloud2, cloud3, cloud4, cloud5],
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded
@@ -291,7 +297,7 @@ const progressListeners = new Set<(progress: number) => void>();
 let loadedCount = 0;
 
 const allPreloads = [
-  ...Object.values(images).map(preloadImage),
+  ...Object.values(images).flatMap((v) => typeof v === "string" ? [preloadImage(v)] : (v as readonly string[]).map((s) => preloadImage(s))),
   ...[...soundClips, ...bgTracks].map(preloadAudio),
 ];
 const totalAssets = allPreloads.length;
