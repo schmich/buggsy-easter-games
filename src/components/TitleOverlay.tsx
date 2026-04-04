@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Modal, Button, useOverlayState } from "@heroui/react";
+import Sparkles from "./Sparkles";
 import { assetsReady, images, isSoundsMuted, isMusicMuted, toggleSoundsMuted, toggleMusicMuted, onSoundsChange, onMusicChange, playContinue, playBell, onLoadProgress } from "../assets";
 
 interface TitleOverlayProps {
@@ -77,31 +78,6 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
     return () => window.removeEventListener("keydown", handler);
   }, [showButton, handleContinue]);
 
-  const [sparkles, setSparkles] = useState<{ id: number; left: number; top: number; size: number }[]>([]);
-  const sparkleHistory = useRef<{ left: number; top: number }[]>([]);
-  const sparkleId = useRef(0);
-
-  useEffect(() => {
-    if (!showButton) return;
-    const interval = setInterval(() => {
-      let left: number, top: number, attempts = 0;
-      do {
-        left = 5 + Math.random() * 90;
-        top = 10 + Math.random() * 70;
-        attempts++;
-      } while (
-        attempts < 20 &&
-        sparkleHistory.current.some((h) => Math.abs(h.left - left) < 15 && Math.abs(h.top - top) < 15)
-      );
-      sparkleHistory.current.push({ left, top });
-      if (sparkleHistory.current.length > 5) sparkleHistory.current.shift();
-      const id = sparkleId.current++;
-      const size = 8 + Math.random() * 8;
-      setSparkles((prev) => [...prev, { id, left, top, size }]);
-      setTimeout(() => setSparkles((prev) => prev.filter((s) => s.id !== id)), 1500);
-    }, 250);
-    return () => clearInterval(interval);
-  }, [showButton]);
 
   // Phase 1: Loading egg
   if (!showDialog) {
@@ -307,17 +283,7 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
           {showButton && (
             <div className="absolute left-1/2 -translate-x-1/2 w-[520px] max-w-[110dvw] pointer-events-none" style={{ top: "27%" }}>
               <img src={images.banner} alt="The 2026 Easter Games" className="w-full" />
-              {sparkles.map((s) => (
-                <svg
-                  key={s.id}
-                  className="absolute animate-twinkle"
-                  style={{ left: `${s.left}%`, top: `${s.top}%`, width: s.size, height: s.size, filter: "drop-shadow(0 0 3px rgba(255,255,255,0.6))" }}
-                  viewBox="0 0 24 24"
-                  fill="rgba(255,255,255,0.9)"
-                >
-                  <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z" />
-                </svg>
-              ))}
+              <Sparkles active={showButton} />
             </div>
           )}
         </Modal.Container>

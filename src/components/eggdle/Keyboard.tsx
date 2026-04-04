@@ -28,7 +28,7 @@ const resultTextColors: Record<LetterResult, string> = {
 
 export default function Keyboard({ onKey, letterStates, disabled, canSubmit = true, canBackspace = true }: KeyboardProps) {
   return (
-    <div className="flex flex-col items-center gap-[4px] pb-2 px-2 w-full max-w-[500px] mx-auto mb-1">
+    <div className="flex flex-col items-center gap-[4px] pb-2 px-2 w-full max-w-[500px] mx-auto mb-1" style={{ animation: "egg-glow-hue 20s linear infinite" }}>
       {rows.map((row, i) => (
         <div key={i} className="flex gap-[3px] w-full justify-center">
           {row.map((key) => {
@@ -37,7 +37,7 @@ export default function Keyboard({ onKey, letterStates, disabled, canSubmit = tr
             const isBackspaceDisabled = key === "BACKSPACE" && !canBackspace;
             const isKeyDisabled = isEnterDisabled || isBackspaceDisabled;
             const state = letterStates.get(key);
-            const bg = isKeyDisabled ? "#e8e8e8" : state ? resultColors[state] : "#ffffff";
+            const bg = isKeyDisabled ? "#e8e8e8" : state ? resultColors[state] : "#e8d5f0";
             const textColor = isKeyDisabled ? "#b0b0b0" : state ? resultTextColors[state] : "#1a1a2e";
 
             return (
