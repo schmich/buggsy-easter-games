@@ -1,7 +1,6 @@
 // Images
 import grass from "./grass.webp";
 import buggsy from "./buggsy.webp";
-import buggsyWin from "./buggsy-win.webp";
 import buggsyLose from "./buggsy-lose.webp";
 import buggsyEggdleIntro from "./buggsy-eggdle-intro.webp";
 import buggsyConneggtionsIntro from "./buggsy-conneggtions-intro.webp";
@@ -62,7 +61,6 @@ import bgMusic6 from "./background-music-6.mp3";
 export const images = {
   grass,
   buggsy,
-  buggsyWin,
   buggsyLose,
   buggsyEggdleIntro,
   buggsyConneggtionsIntro,
