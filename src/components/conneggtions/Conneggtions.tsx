@@ -12,7 +12,7 @@ import Clouds from "../Clouds";
 import { PUZZLE } from "../../lib/conneggtionsData";
 import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 import { checkGuess, shuffleWords } from "../../lib/conneggtions";
-import { images, audio, playFailedAudio, playClick, playLoseAudio, stopAllVoices } from "../../assets";
+import { images, audio, playFailedAudio, playClick, playClap, playLoseAudio, stopAllVoices } from "../../assets";
 import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 export default function Conneggtions() {
@@ -108,6 +108,11 @@ export default function Conneggtions() {
 
       // Phase 1: Bounce selected tiles (staggered, ~600ms total)
       setBouncingWords(words);
+
+      // Play clap during animation
+      setTimeout(() => {
+        playClap();
+      }, 100);
 
       // Phase 2: Shrink tiles away after bounce
       setTimeout(() => {

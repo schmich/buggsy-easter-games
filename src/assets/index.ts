@@ -47,6 +47,7 @@ import continueSound from "./continue.mp3";
 import enterSound from "./enter.mp3";
 import error from "./error.mp3";
 import bell from "./bell.mp3";
+import clap from "./clap.mp3";
 import buggsyLoseMad from "./buggsy-lose-mad.mp3";
 import buggsyLoseEggShortage from "./buggsy-lose-egg-shortage.mp3";
 import buggsyLoseSecondChances from "./buggsy-lose-second-chances.mp3";
@@ -212,6 +213,14 @@ export function playBell() {
   bellSound.play();
 }
 
+const clapSound = new Audio(clap);
+
+export function playClap() {
+  if (soundsMuted) return;
+  clapSound.currentTime = 0;
+  clapSound.play();
+}
+
 // Failed guess audio set — shuffled, cycles through all
 const failedClips = [
   new Audio(buggsySwingMiss),
@@ -257,7 +266,7 @@ export function playLoseAudio() {
   clip.play();
 }
 
-const soundClips = [...Object.values(audio), ...failedClips, ...loseClips, continueSfx, enterSfx, errorSound, bellSound];
+const soundClips = [...Object.values(audio), ...failedClips, ...loseClips, continueSfx, enterSfx, errorSound, bellSound, clapSound];
 
 // Apply persisted mute state on load
 if (soundsMuted) {
