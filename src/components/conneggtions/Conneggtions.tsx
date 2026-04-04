@@ -164,8 +164,8 @@ export default function Conneggtions() {
   return (
     <>
       <Decorations
-        topLeft={{ src: images.peep, className: "top-[60px] w-[140px]", style: { left: "-5%" } }}
-        topRight={{ src: images.chocolateBunny, className: "top-[50px] w-[120px]", style: { right: "-5%" } }}
+        topLeft={{ src: images.peepChick, className: "top-[60px] w-[140px]", style: { left: "-5%" } }}
+        topRight={{ src: images.peepBunny, className: "top-[50px] w-[120px]", style: { right: "-5%" } }}
         bottomLeft={{ src: images.goldBunnyLeft, className: "h-[300px] w-auto", style: { bottom: "40px", left: "-40px" }, sparkle: true }}
         bottomRight={{ src: images.goldBunnyRight, className: "h-[300px] w-auto", style: { bottom: "40px", right: "-40px" }, sparkle: true }}
       />

@@ -12,7 +12,8 @@ import jellyBeans from "./jelly-beans.webp";
 import chocolateBunny from "./chocolate-bunny.webp";
 import goldBunnyLeft from "./gold-bunny-left.webp";
 import goldBunnyRight from "./gold-bunny-right.webp";
-import peep from "./peep.webp";
+import peepChick from "./peep-chick.webp";
+import peepBunny from "./peep-bunny.webp";
 import eggBorder from "./egg-border.webp";
 import buggsyConneggtionsWinImg from "./buggsy-coneggtions-win.webp";
 import loadingEgg from "./loading-egg.webp";
@@ -54,7 +55,8 @@ export const images = {
   banner,
   jellyBeans,
   chocolateBunny,
-  peep,
+  peepChick,
+  peepBunny,
   goldBunnyLeft,
   goldBunnyRight,
   eggBorder,
