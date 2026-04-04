@@ -132,8 +132,8 @@ export function startBackgroundMusic() {
 }
 
 // Mute state — declared early so playClick/playFailedAudio can reference it
-let soundsMuted = false;
-let musicMuted = false;
+let soundsMuted = localStorage.getItem("sounds-muted") === "1";
+let musicMuted = localStorage.getItem("music-muted") === "1";
 
 // Click sound via Web Audio API for reliable rapid playback on mobile
 let clickBuffer: AudioBuffer | null = null;
@@ -223,6 +223,14 @@ export function playFailedAudio() {
 
 const soundClips = [...Object.values(audio), ...failedClips, continueSfx, enterSfx, errorSound, bellSound];
 
+// Apply persisted mute state on load
+if (soundsMuted) {
+  for (const el of soundClips) el.muted = true;
+}
+if (musicMuted) {
+  for (const el of bgTracks) el.muted = true;
+}
+
 const soundsListeners = new Set<(muted: boolean) => void>();
 const musicListeners = new Set<(muted: boolean) => void>();
 
@@ -236,6 +244,7 @@ export function isMusicMuted() {
 
 export function setSoundsMuted(value: boolean) {
   soundsMuted = value;
+  localStorage.setItem("sounds-muted", value ? "1" : "0");
   for (const el of soundClips) {
     el.muted = value;
   }
@@ -248,6 +257,7 @@ export function setSoundsMuted(value: boolean) {
 
 export function setMusicMuted(value: boolean) {
   musicMuted = value;
+  localStorage.setItem("music-muted", value ? "1" : "0");
   for (const el of bgTracks) {
     el.muted = value;
   }
