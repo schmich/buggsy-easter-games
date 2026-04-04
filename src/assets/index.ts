@@ -41,7 +41,6 @@ import buggsyWelcomeBackTraveler from "./buggsy-title-welcome-back-travelers.mp3
 import buggsyConneggtions1 from "./buggsy-conneggtions-1.mp3";
 import buggsyConneggtions2 from "./buggsy-conneggtions-2.mp3";
 import buggsyConneggtions3 from "./buggsy-conneggtions-3.mp3";
-import buggsyConneggtions4 from "./buggsy-conneggtions-4.mp3";
 import click from "./click.mp3";
 import continueSound from "./continue.mp3";
 import enterSound from "./enter.mp3";
@@ -116,7 +115,6 @@ export const audio = {
   buggsyConneggtions1: new Audio(buggsyConneggtions1),
   buggsyConneggtions2: new Audio(buggsyConneggtions2),
   buggsyConneggtions3: new Audio(buggsyConneggtions3),
-  buggsyConneggtions4: new Audio(buggsyConneggtions4),
 } as const;
 
 export function stopAllVoices() {

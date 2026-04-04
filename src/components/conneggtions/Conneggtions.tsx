@@ -132,7 +132,7 @@ export default function Conneggtions() {
         setAnimating(false);
 
         // Play corresponding Buggsy audio for each solved group
-        const groupAudio = [audio.buggsyConneggtions1, audio.buggsyConneggtions2, audio.buggsyConneggtions3, audio.buggsyConneggtions4];
+        const groupAudio = [audio.buggsyConneggtions1, audio.buggsyConneggtions2, audio.buggsyConneggtions3];
         const clip = groupAudio[newSolved.length - 1];
         if (clip) {
           clip.currentTime = 0;
