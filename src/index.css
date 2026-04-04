@@ -21,6 +21,7 @@ body {
   --animate-wobble-float: wobble-float 8s ease-in-out infinite;
   --animate-grow-in: grow-in 0.8s ease-out forwards;
   --animate-egg-pulse: egg-pulse 2s ease-in-out infinite;
+  --animate-egg-dismiss: egg-dismiss 0.6s ease-in-out forwards;
   --animate-twinkle: twinkle 1.5s ease-in-out infinite;
   --animate-sun-rays: sun-rays 20s linear infinite;
   --animate-shimmer: shimmer 3s ease-in-out infinite;
@@ -227,6 +228,21 @@ body {
   50% {
     opacity: 1;
     transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes egg-dismiss {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }
 

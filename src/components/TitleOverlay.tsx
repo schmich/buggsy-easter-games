@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Modal, Button, useOverlayState } from "@heroui/react";
 import Sparkles from "./Sparkles";
 import { assetsReady, images, isSoundsMuted, isMusicMuted, toggleSoundsMuted, toggleMusicMuted, onSoundsChange, onMusicChange, playContinue, playBell, onLoadProgress } from "../assets";
@@ -14,6 +14,7 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
   const [progress, setProgress] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [shrinking, setShrinking] = useState(false);
+  const dismissedRef = useRef(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [soundsMuted, setSoundsMuted] = useState(isSoundsMuted);
@@ -52,13 +53,14 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
 
   // Handle egg click
   const handleEggClick = useCallback(() => {
-    if (!loaded) return;
+    if (!loaded || dismissedRef.current) return;
+    dismissedRef.current = true;
     playBell();
     setShrinking(true);
     setTimeout(() => {
       setShowDialog(true);
       setTimeout(() => setShowButton(true), 50);
-    }, 400);
+    }, 600);
   }, [loaded]);
 
   // Enter key on egg
@@ -101,8 +103,8 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
           />
         )}
         <div
-          className={`relative transition-all duration-400 ease-in ${
-            shrinking ? "scale-0 opacity-0" : "scale-100 opacity-100"
+          className={`relative ${
+            shrinking ? "animate-egg-dismiss" : ""
           } ${loaded && !shrinking ? "animate-egg-pulse" : ""}`}
         >
           {/* Full color egg (bottom layer) */}
