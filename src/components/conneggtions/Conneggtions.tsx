@@ -12,7 +12,7 @@ import Clouds from "../Clouds";
 import { PUZZLE } from "../../lib/conneggtionsData";
 import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
 import { checkGuess, shuffleWords } from "../../lib/conneggtions";
-import { images, audio, playFailedAudio, playClick, stopAllVoices } from "../../assets";
+import { images, audio, playFailedAudio, playClick, playLoseAudio, stopAllVoices } from "../../assets";
 import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 export default function Conneggtions() {
@@ -157,8 +157,7 @@ export default function Conneggtions() {
       if (newMistakes === 0) {
         setTimeout(() => {
           setGameOver(true);
-          audio.buggsyLossMad.currentTime = 0;
-          audio.buggsyLossMad.play();
+          playLoseAudio();
         }, 800);
       }
     }

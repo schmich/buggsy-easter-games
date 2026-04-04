@@ -48,7 +48,10 @@ import continueSound from "./continue.mp3";
 import enterSound from "./enter.mp3";
 import error from "./error.mp3";
 import bell from "./bell.mp3";
-import buggsyLossMad from "./buggsy-lose-mad.mp3";
+import buggsyLoseMad from "./buggsy-lose-mad.mp3";
+import buggsyLoseEggShortage from "./buggsy-lose-egg-shortage.mp3";
+import buggsyLoseSecondChances from "./buggsy-lose-second-chances.mp3";
+import buggsyLoseTrip from "./buggsy-lose-trip.mp3";
 import bgMusic1 from "./background-music-1.mp3";
 import bgMusic2 from "./background-music-2.mp3";
 import bgMusic3 from "./background-music-3.mp3";
@@ -115,7 +118,6 @@ export const audio = {
   buggsyConneggtions2: new Audio(buggsyConneggtions2),
   buggsyConneggtions3: new Audio(buggsyConneggtions3),
   buggsyConneggtions4: new Audio(buggsyConneggtions4),
-  buggsyLossMad: new Audio(buggsyLossMad),
 } as const;
 
 export function stopAllVoices() {
@@ -238,7 +240,26 @@ export function playFailedAudio() {
   clip.play();
 }
 
-const soundClips = [...Object.values(audio), ...failedClips, continueSfx, enterSfx, errorSound, bellSound];
+// Lose audio pool — shuffled once, cycles through on each game loss
+const loseClips = [
+  new Audio(buggsyLoseMad),
+  new Audio(buggsyLoseEggShortage),
+  new Audio(buggsyLoseSecondChances),
+  new Audio(buggsyLoseTrip),
+];
+
+const loseQueue: HTMLAudioElement[] = shuffle(loseClips);
+let loseIndex = 0;
+
+export function playLoseAudio() {
+  if (soundsMuted) return;
+  const clip = loseQueue[loseIndex % loseQueue.length];
+  loseIndex++;
+  clip.currentTime = 0;
+  clip.play();
+}
+
+const soundClips = [...Object.values(audio), ...failedClips, ...loseClips, continueSfx, enterSfx, errorSound, bellSound];
 
 // Apply persisted mute state on load
 if (soundsMuted) {

@@ -11,7 +11,7 @@ import GameIntroDialog from "../GameIntroDialog";
 import Clouds from "../Clouds";
 import { evaluateGuess, type LetterResult } from "../../lib/eggdle";
 import { isValidWord } from "../../lib/words";
-import { audio, images, playFailedAudio, playClick, playEnter, playError, stopAllVoices } from "../../assets";
+import { audio, images, playFailedAudio, playClick, playEnter, playError, playLoseAudio, stopAllVoices } from "../../assets";
 import { hasSeenIntro, markIntroSeen } from "../../lib/introState";
 
 const MAX_GUESSES = 6;
@@ -152,8 +152,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
       }, revealDuration);
       setTimeout(() => {
         setShowFailure(true);
-        audio.buggsyLossMad.currentTime = 0;
-        audio.buggsyLossMad.play();
+        playLoseAudio();
       }, revealDuration + 500);
     }
   }, [currentGuess, guesses, results, word, wordLength, showToast]);
