@@ -13,6 +13,7 @@ import chocolateBunny from "./chocolate-bunny.webp";
 import bunnyLeft from "./bunny-left.webp";
 import bunnyRight from "./bunny-right.webp";
 import peep from "./peep.webp";
+import eggBorder from "./egg-border.webp";
 
 // Audio
 import buggsyEggdleWin from "./buggsy-eggdle-win.mp3";
@@ -49,6 +50,7 @@ export const images = {
   peep,
   bunnyLeft,
   bunnyRight,
+  eggBorder,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded
