@@ -20,7 +20,7 @@ export default function Layout() {
         <img
           src={images.grass}
           alt=""
-          className={`absolute bottom-0 left-0 w-full opacity-100 pointer-events-none z-[1] ${!titleDismissed ? "animate-grow-in" : ""}`}
+          className={`absolute bottom-0 left-0 w-full opacity-100 pointer-events-none z-[11] ${!titleDismissed ? "animate-grow-in" : ""}`}
         />
       )}
 
