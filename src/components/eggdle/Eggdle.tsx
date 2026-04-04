@@ -128,7 +128,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
       revealingRef.current = false;
     }, revealDuration);
 
-    if (!isWin) {
+    if (!isWin && !isLoss) {
       setTimeout(() => {
         playFailedAudio();
       }, (wordLength * 350) / 2);
