@@ -108,7 +108,7 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
           <img
             src={images.loadingEgg}
             alt=""
-            className="h-[58vh] max-h-[495px] w-auto"
+            className="h-auto w-auto max-w-[90dvw] max-h-[90dvh]"
           />
           {/* Gray desaturated overlay (top layer) — clips from top down as progress increases */}
           <img
