@@ -22,6 +22,11 @@ import cloud2 from "./cloud-2.webp";
 import cloud3 from "./cloud-3.webp";
 import cloud4 from "./cloud-4.webp";
 import cloud5 from "./cloud-5.webp";
+import cloud6 from "./cloud-6.webp";
+import cloud7 from "./cloud-7.webp";
+import cloud8 from "./cloud-8.webp";
+import cloud9 from "./cloud-9.webp";
+import cloud10 from "./cloud-10.webp";
 
 // Audio
 import buggsyEggdleWin from "./buggsy-eggdle-win.mp3";
@@ -43,7 +48,7 @@ import continueSound from "./continue.mp3";
 import enterSound from "./enter.mp3";
 import error from "./error.mp3";
 import bell from "./bell.mp3";
-import buggsyLossMad from "./buggsy-loss-mad.mp3";
+import buggsyLossMad from "./buggsy-lose-mad.mp3";
 import bgMusic1 from "./background-music-1.mp3";
 import bgMusic2 from "./background-music-2.mp3";
 import bgMusic3 from "./background-music-3.mp3";
@@ -70,7 +75,7 @@ export const images = {
   eggBorder,
   buggsyConneggtionsWin: buggsyConneggtionsWinImg,
   loadingEgg,
-  clouds: [cloud1, cloud2, cloud3, cloud4, cloud5],
+  clouds: [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7, cloud8, cloud9, cloud10],
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded

@@ -1,84 +1,119 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { images } from "../assets";
 
 const CLOUD_SRCS = images.clouds;
-const TARGET_COUNT = 3;
+const MIN_COUNT = 4;
+const MAX_COUNT = 5;
 const SPAWN_INTERVAL = 2000;
-const MIN_SPEED = 0.3;
-const MAX_SPEED = 0.8;
-const CLOUD_WIDTH = 200;
+const MIN_SPEED = 0.2;
+const MAX_SPEED = 0.5;
 const HEADER_HEIGHT = 56;
+
+// Measure natural dimensions of each cloud image once loaded
+const cloudSizes: { width: number; height: number }[] = [];
+const cloudSizesReady = Promise.all(
+  CLOUD_SRCS.map(
+    (src, i) =>
+      new Promise<void>((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          cloudSizes[i] = { width: img.naturalWidth, height: img.naturalHeight };
+          resolve();
+        };
+        img.onerror = () => {
+          cloudSizes[i] = { width: 200, height: 80 };
+          resolve();
+        };
+        img.src = src;
+      })
+  )
+);
 
 interface Cloud {
   id: number;
   srcIndex: number;
   x: number;
-  yPct: number; // percentage within the allowed vertical band
+  yPct: number;
+  width: number;
   speed: number;
-  direction: 1 | -1; // 1 = moving right, -1 = moving left
+  direction: 1 | -1;
 }
 
 let nextId = 0;
 
-/** Random y as a percentage (0–100) of the allowed cloud band */
 function randomYPct() {
   return Math.random() * 100;
 }
 
-/** Convert yPct to actual top px — clouds live in top 50% of viewport, below the header */
 function yPctToPx(pct: number) {
-  const bandHeight = window.innerHeight * 0.5 - HEADER_HEIGHT;
+  const bandHeight = window.innerHeight * 0.75 - HEADER_HEIGHT;
   if (bandHeight <= 0) return HEADER_HEIGHT;
   return HEADER_HEIGHT + (pct / 100) * bandHeight;
 }
 
+function cloudWidth(srcIndex: number): number {
+  return cloudSizes[srcIndex]?.width ?? 200;
+}
+
 export default function Clouds() {
   const [clouds, setClouds] = useState<Cloud[]>([]);
+  const [ready, setReady] = useState(false);
   const cloudsRef = useRef(clouds);
   cloudsRef.current = clouds;
   const frameRef = useRef(0);
   const lastTimeRef = useRef(0);
   const spawnTimerRef = useRef(0);
 
+  useEffect(() => {
+    cloudSizesReady.then(() => setReady(true));
+  }, []);
+
   const spawnCloud = useCallback(() => {
     const current = cloudsRef.current;
-    if (current.length >= TARGET_COUNT) return;
+    const target = MIN_COUNT + Math.floor(Math.random() * (MAX_COUNT - MIN_COUNT + 1));
+    if (current.length >= target) return;
 
     const usedIndices = new Set(current.map((c) => c.srcIndex));
     const available = CLOUD_SRCS.map((_, i) => i).filter((i) => !usedIndices.has(i));
     if (available.length === 0) return;
 
     const srcIndex = available[Math.floor(Math.random() * available.length)];
+    const w = cloudWidth(srcIndex);
     const direction = (Math.random() < 0.5 ? 1 : -1) as 1 | -1;
     const speed = MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED);
     const yPct = randomYPct();
-    const x = direction === 1 ? -CLOUD_WIDTH : window.innerWidth;
+    const x = direction === 1 ? -w : window.innerWidth;
 
     setClouds((prev) => [
       ...prev,
-      { id: nextId++, srcIndex, x, yPct, speed, direction },
+      { id: nextId++, srcIndex, x, yPct, width: w, speed, direction },
     ]);
   }, []);
 
   useEffect(() => {
+    if (!ready) return;
     // Seed initial clouds spread across screen
     const initial: Cloud[] = [];
     const usedIndices = new Set<number>();
-    for (let i = 0; i < TARGET_COUNT; i++) {
+    const initialCount = MIN_COUNT + Math.floor(Math.random() * (MAX_COUNT - MIN_COUNT + 1));
+    for (let i = 0; i < initialCount; i++) {
       const available = CLOUD_SRCS.map((_, idx) => idx).filter((idx) => !usedIndices.has(idx));
       if (available.length === 0) break;
       const srcIndex = available[Math.floor(Math.random() * available.length)];
       usedIndices.add(srcIndex);
+      const w = cloudWidth(srcIndex);
       const direction = (Math.random() < 0.5 ? 1 : -1) as 1 | -1;
       const speed = MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED);
       const yPct = randomYPct();
-      const x = (window.innerWidth / (TARGET_COUNT + 1)) * (i + 1) - CLOUD_WIDTH / 2;
-      initial.push({ id: nextId++, srcIndex, x, yPct, speed, direction });
+      const x = (window.innerWidth / (initialCount + 1)) * (i + 1) - w / 2;
+      initial.push({ id: nextId++, srcIndex, x, yPct, width: w, speed, direction });
     }
     setClouds(initial);
-  }, []);
+  }, [ready]);
 
   useEffect(() => {
+    if (!ready) return;
     const animate = (time: number) => {
       if (!lastTimeRef.current) lastTimeRef.current = time;
       const dt = time - lastTimeRef.current;
@@ -89,7 +124,7 @@ export default function Clouds() {
           .map((c) => ({ ...c, x: c.x + c.speed * c.direction * (dt / 16) }))
           .filter((c) => {
             if (c.direction === 1) return c.x < window.innerWidth + 10;
-            return c.x > -CLOUD_WIDTH - 10;
+            return c.x > -c.width - 10;
           });
         return next;
       });
@@ -105,10 +140,10 @@ export default function Clouds() {
 
     frameRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frameRef.current);
-  }, [spawnCloud]);
+  }, [ready, spawnCloud]);
 
-  return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+  return createPortal(
+    <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
       {clouds.map((c) => (
         <img
           key={c.id}
@@ -118,11 +153,12 @@ export default function Clouds() {
           style={{
             left: c.x,
             top: yPctToPx(c.yPct),
-            width: CLOUD_WIDTH,
+            width: c.width,
             opacity: 0.85,
           }}
         />
       ))}
-    </div>
+    </div>,
+    document.getElementById("root")!.parentElement!
   );
 }
