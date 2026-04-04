@@ -36,6 +36,7 @@ interface Cloud {
   x: number;
   yPct: number;
   width: number;
+  height: number;
   speed: number;
   direction: 1 | -1;
 }
@@ -54,6 +55,26 @@ function yPctToPx(pct: number) {
 
 function cloudWidth(srcIndex: number): number {
   return cloudSizes[srcIndex]?.width ?? 200;
+}
+
+function cloudHeight(srcIndex: number): number {
+  return cloudSizes[srcIndex]?.height ?? 80;
+}
+
+/** Try to find a yPct that doesn't overlap existing clouds vertically. */
+function findNonOverlappingYPct(existing: Cloud[], h: number, maxAttempts = 20): number {
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const yPct = randomYPct();
+    const top = yPctToPx(yPct);
+    const bottom = top + h;
+    const overlaps = existing.some((c) => {
+      const cTop = yPctToPx(c.yPct);
+      const cBottom = cTop + c.height;
+      return top < cBottom && bottom > cTop;
+    });
+    if (!overlaps) return yPct;
+  }
+  return randomYPct();
 }
 
 export default function Clouds() {
@@ -80,14 +101,15 @@ export default function Clouds() {
 
     const srcIndex = available[Math.floor(Math.random() * available.length)];
     const w = cloudWidth(srcIndex);
+    const h = cloudHeight(srcIndex);
     const direction = (Math.random() < 0.5 ? 1 : -1) as 1 | -1;
     const speed = MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED);
-    const yPct = randomYPct();
+    const yPct = findNonOverlappingYPct(current, h);
     const x = direction === 1 ? -w : window.innerWidth;
 
     setClouds((prev) => [
       ...prev,
-      { id: nextId++, srcIndex, x, yPct, width: w, speed, direction },
+      { id: nextId++, srcIndex, x, yPct, width: w, height: h, speed, direction },
     ]);
   }, []);
 
@@ -103,11 +125,12 @@ export default function Clouds() {
       const srcIndex = available[Math.floor(Math.random() * available.length)];
       usedIndices.add(srcIndex);
       const w = cloudWidth(srcIndex);
+      const h = cloudHeight(srcIndex);
       const direction = (Math.random() < 0.5 ? 1 : -1) as 1 | -1;
       const speed = MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED);
-      const yPct = randomYPct();
+      const yPct = findNonOverlappingYPct(initial, h);
       const x = (window.innerWidth / (initialCount + 1)) * (i + 1) - w / 2;
-      initial.push({ id: nextId++, srcIndex, x, yPct, width: w, speed, direction });
+      initial.push({ id: nextId++, srcIndex, x, yPct, width: w, height: h, speed, direction });
     }
     setClouds(initial);
   }, [ready]);
