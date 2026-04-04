@@ -14,6 +14,7 @@ import goldBunnyLeft from "./gold-bunny-left.webp";
 import goldBunnyRight from "./gold-bunny-right.webp";
 import peep from "./peep.webp";
 import eggBorder from "./egg-border.webp";
+import loadingEgg from "./loading-egg.webp";
 
 // Audio
 import buggsyEggdleWin from "./buggsy-eggdle-win.mp3";
@@ -51,6 +52,7 @@ export const images = {
   goldBunnyLeft,
   goldBunnyRight,
   eggBorder,
+  loadingEgg,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded
@@ -250,7 +252,28 @@ export function onMusicChange(fn: (muted: boolean) => void) {
   return () => { musicListeners.delete(fn); };
 }
 
-export const assetsReady: Promise<void> = Promise.all([
+// Asset loading with progress tracking
+const progressListeners = new Set<(progress: number) => void>();
+let loadedCount = 0;
+
+const allPreloads = [
   ...Object.values(images).map(preloadImage),
   ...[...soundClips, ...bgTracks].map(preloadAudio),
-]).then(() => {});
+];
+const totalAssets = allPreloads.length;
+
+export const assetsReady: Promise<void> = Promise.all(
+  allPreloads.map((p) =>
+    p.then(() => {
+      loadedCount++;
+      const progress = loadedCount / totalAssets;
+      progressListeners.forEach((fn) => fn(progress));
+    })
+  )
+).then(() => {});
+
+export function onLoadProgress(fn: (progress: number) => void) {
+  progressListeners.add(fn);
+  if (loadedCount > 0) fn(loadedCount / totalAssets);
+  return () => { progressListeners.delete(fn); };
+}
