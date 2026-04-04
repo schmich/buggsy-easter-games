@@ -198,13 +198,13 @@ export default function Conneggtions() {
           <div className="flex gap-3 mt-1">
             <Button
               onPress={handleShuffle}
-              className="bg-[#e8d5f0] text-[#6b4c8a] rounded-full px-5 py-2 text-base font-medium cursor-pointer hover:bg-[#dcc4e8] transition-colors"
+              className="bg-gradient-to-b from-[#e8d5f0] to-[#d4b8e8] text-[#6b4c8a] rounded-full px-5 py-2 text-base font-medium cursor-pointer hover:opacity-90 transition-opacity"
             >
               Shuffle
             </Button>
             <Button
               onPress={handleDeselect}
-              className="bg-[#e8d5f0] text-[#6b4c8a] rounded-full px-5 py-2 text-base font-medium cursor-pointer hover:bg-[#dcc4e8] transition-colors"
+              className="bg-gradient-to-b from-[#e8d5f0] to-[#d4b8e8] text-[#6b4c8a] rounded-full px-5 py-2 text-base font-medium cursor-pointer hover:opacity-90 transition-opacity"
             >
               Deselect All
             </Button>
