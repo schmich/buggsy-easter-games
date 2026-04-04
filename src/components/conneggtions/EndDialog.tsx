@@ -43,7 +43,7 @@ export default function EndDialog({
             <div className="flex flex-col items-center px-8 pt-6 pb-8">
               {/* Bunny image */}
               <img
-                src={won ? images.buggsyWin : images.buggsyLose}
+                src={won ? images.buggsyConneggtionsWin : images.buggsyLose}
                 alt=""
                 className="h-40 w-auto"
               />

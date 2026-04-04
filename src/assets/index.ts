@@ -14,6 +14,7 @@ import goldBunnyLeft from "./gold-bunny-left.webp";
 import goldBunnyRight from "./gold-bunny-right.webp";
 import peep from "./peep.webp";
 import eggBorder from "./egg-border.webp";
+import buggsyConneggtionsWinImg from "./buggsy-coneggtions-win.webp";
 import loadingEgg from "./loading-egg.webp";
 
 // Audio
@@ -57,6 +58,7 @@ export const images = {
   goldBunnyLeft,
   goldBunnyRight,
   eggBorder,
+  buggsyConneggtionsWin: buggsyConneggtionsWinImg,
   loadingEgg,
 } as const;
 
