@@ -3,8 +3,8 @@ import { createPortal } from "react-dom";
 import { images } from "../assets";
 
 const CLOUD_SRCS = images.clouds;
-const MIN_COUNT = 4;
-const MAX_COUNT = 5;
+const MIN_COUNT = 5;
+const MAX_COUNT = 7;
 const SPAWN_INTERVAL = 2000;
 const MIN_SPEED = 0.2;
 const MAX_SPEED = 0.5;
