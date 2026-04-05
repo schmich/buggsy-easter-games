@@ -163,7 +163,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
 
   const onKey = useCallback(
     (key: string) => {
-      if (gameOver || revealingRef.current) return;
+      if (showIntro || gameOver || revealingRef.current) return;
 
       if (key === "ENTER") {
         submitGuess();
@@ -175,7 +175,7 @@ export default function Eggdle({ targetWord }: EggdleProps) {
         setCurrentGuess(currentGuessRef.current + key);
       }
     },
-    [gameOver, submitGuess, wordLength, setCurrentGuess]
+    [showIntro, gameOver, submitGuess, wordLength, setCurrentGuess]
   );
 
   // Physical keyboard handler

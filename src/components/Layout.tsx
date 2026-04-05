@@ -15,11 +15,11 @@ export default function Layout() {
     return () => clearTimeout(t);
   }, [assetsLoaded]);
 
-  // Delay game mount by one frame to avoid jank during title dismiss
+  // Delay game mount to let TitleOverlay teardown settle before mounting game
   useEffect(() => {
     if (!titleDismissed) return;
-    const id = requestAnimationFrame(() => setGameReady(true));
-    return () => cancelAnimationFrame(id);
+    const id = setTimeout(() => setGameReady(true), 500);
+    return () => clearTimeout(id);
   }, [titleDismissed]);
 
   return (
