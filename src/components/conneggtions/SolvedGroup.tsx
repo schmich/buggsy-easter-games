@@ -16,7 +16,7 @@ export default function SolvedGroup({ group }: SolvedGroupProps) {
 
   return (
     <div
-      className="w-full max-w-[480px] rounded-lg py-3 px-4 text-center animate-reveal-pulse"
+      className="w-full max-w-[480px] rounded-lg py-2 px-4 text-center animate-reveal-pulse"
       style={{ backgroundColor: colors.bg, color: colors.text }}
     >
       <p
@@ -25,7 +25,7 @@ export default function SolvedGroup({ group }: SolvedGroupProps) {
       >
         {group.category}
       </p>
-      <p className="text-base mt-1 opacity-80">
+      <p className="text-sm opacity-80">
         {group.words.join(", ")}
       </p>
     </div>

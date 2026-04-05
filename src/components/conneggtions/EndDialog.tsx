@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { Modal, Button, useOverlayState } from "@heroui/react";
 import type { ConneggtionsGroup } from "../../lib/conneggtionsData";
-import { images, playContinue } from "../../assets";
+import { images, playContinue, stopAllVoices } from "../../assets";
 
 const DIFFICULTY_COLORS: Record<number, { bg: string; text: string }> = {
   0: { bg: "#f6c443", text: "#1a1a2e" },
@@ -24,6 +25,7 @@ export default function EndDialog({
   mistakesRemaining,
   onRetry,
 }: EndDialogProps) {
+  const navigate = useNavigate();
   const state = useOverlayState({
     isOpen,
     onOpenChange: () => {},
@@ -86,7 +88,7 @@ export default function EndDialog({
                           <p className="text-base uppercase">
                             {group.category}
                           </p>
-                          <p className="text-sm mt-0.5 opacity-80">
+                          <p className="text-sm opacity-80">
                             {group.words.join(", ")}
                           </p>
                         </div>
@@ -106,6 +108,13 @@ export default function EndDialog({
                       )
                     )}
                   </div>
+
+                  <Button
+                    onPress={() => { playContinue(); stopAllVoices(); navigate("/victory"); }}
+                    className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer mt-2"
+                  >
+                    Continue
+                  </Button>
                 </>
               ) : (
                 <Button
