@@ -249,7 +249,7 @@ export default function Conneggtions() {
         }}
         image={images.buggsyConneggtionsIntro}
         title="Conneggtions"
-        description="Buggsy likes to scramble things up. Nothing over easy here. Find the four baskets of conneggtions among the sixteen words, if you can."
+        description="Buggsy likes to scramble things up. Nothing over easy here. Find the four baskets of conneggtions among the sixteen words."
       />
     </>
   );
