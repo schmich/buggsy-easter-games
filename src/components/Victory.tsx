@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { images, audio, stopAllVoices, stopBackgroundMusic } from "../assets";
+import { images, audio, stopAllVoices, stopBackgroundMusic, startBackgroundMusic } from "../assets";
 import Sparkles from "./Sparkles";
 import SunRays from "./SunRays";
 import Clouds from "./Clouds";
@@ -149,11 +149,18 @@ export default function Victory() {
     };
   }, [scene]);
 
-  // Scene 3: Play note audio when scene is fully visible (fade complete)
+  // Scene 3: Play note audio when scene is fully visible, then restart bg music
   useEffect(() => {
     if (scene !== "note" || fading || !sceneVisible) return;
-    audio.buggsyVictoryNote.currentTime = 0;
-    audio.buggsyVictoryNote.play();
+    const clip = audio.buggsyVictoryNote;
+    clip.currentTime = 0;
+    clip.play();
+    clip.onended = () => {
+      setTimeout(() => startBackgroundMusic(), 5000);
+    };
+    return () => {
+      clip.onended = null;
+    };
   }, [scene, fading, sceneVisible]);
 
   // Scene 1: Skip speech on click

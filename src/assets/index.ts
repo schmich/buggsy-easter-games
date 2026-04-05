@@ -158,15 +158,27 @@ const bgTracks = shuffle([new Audio(bgMusic1), new Audio(bgMusic2), new Audio(bg
 let bgTrackIndex = 0;
 let bgStarted = false;
 
+const BG_VOLUME = 0.05;
+const BG_FADE_IN = 3000;
+
 function playNextBgTrack() {
   const track = bgTracks[bgTrackIndex % bgTracks.length];
-  track.volume = 0.05;
+  track.volume = 0;
   track.currentTime = 0;
   track.onended = () => {
     bgTrackIndex++;
     playNextBgTrack();
   };
   track.play();
+  // Fade in
+  const steps = 30;
+  const interval = BG_FADE_IN / steps;
+  let step = 0;
+  const timer = setInterval(() => {
+    step++;
+    track.volume = Math.min(BG_VOLUME, BG_VOLUME * (step / steps));
+    if (step >= steps) clearInterval(timer);
+  }, interval);
 }
 
 export function startBackgroundMusic() {
@@ -176,6 +188,7 @@ export function startBackgroundMusic() {
 }
 
 export function stopBackgroundMusic(fadeDuration = 3000) {
+  bgStarted = false;
   const track = bgTracks[bgTrackIndex % bgTracks.length];
   const startVolume = track.volume;
   const steps = 30;
