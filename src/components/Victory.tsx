@@ -80,6 +80,13 @@ export default function Victory() {
   const orbContainerRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>(0);
 
+  // Accept sequence state
+  type AcceptPhase = "waiting1" | "playing1" | "waiting2" | "playing2" | "waiting3" | "playing3" | "ready";
+  const acceptPhaseRef = useRef<AcceptPhase>("waiting1");
+  const acceptTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const wait2ClickedRef = useRef(false);
+  const wait2TimerDoneRef = useRef(false);
+
   // Scene 1: Play victory audio on mount
   useEffect(() => {
     stopAllVoices();
@@ -109,12 +116,12 @@ export default function Victory() {
         // Now safe to remove brightness overlay — screen is black
         setPoweringUp(false);
         setVisibleOrbCount(3);
-        // Hold on black for 6s, then fade in to note
+        // Hold on black for 5s, then fade in to note
         setTimeout(() => {
           setScene("note");
           setFadeDuration(4000);
           setSceneVisible(true);
-        }, 6000);
+        }, 5000);
       }
     } else {
       // Scene is now visible, fade is done
@@ -148,6 +155,58 @@ export default function Victory() {
       clip.loop = false;
     };
   }, [scene]);
+
+  // Helper to play an accept clip and advance phase
+  const playAccept = useCallback((clip: HTMLAudioElement, nextPhase: AcceptPhase, onEnded?: () => void) => {
+    clip.currentTime = 0;
+    clip.play();
+    clip.onended = () => {
+      clip.onended = null;
+      acceptPhaseRef.current = nextPhase;
+      onEnded?.();
+    };
+  }, []);
+
+  // Scene 2: Accept sequence on peep scene load
+  useEffect(() => {
+    if (scene !== "peep") return;
+    acceptPhaseRef.current = "waiting1";
+    wait2ClickedRef.current = false;
+    wait2TimerDoneRef.current = false;
+
+    // Wait 6s then auto-play accept-1
+    acceptTimerRef.current = setTimeout(() => {
+      if (acceptPhaseRef.current !== "waiting1") return;
+      acceptPhaseRef.current = "playing1";
+      playAccept(audio.buggsyVictoryAccept1, "waiting2", () => {
+        // Start 3s timer for waiting2
+        wait2TimerDoneRef.current = false;
+        wait2ClickedRef.current = false;
+        acceptTimerRef.current = setTimeout(() => {
+          wait2TimerDoneRef.current = true;
+          if (wait2ClickedRef.current) {
+            acceptPhaseRef.current = "playing2";
+            playAccept(audio.buggsyVictoryAccept2, "waiting3", () => {
+              acceptTimerRef.current = setTimeout(() => {
+                acceptPhaseRef.current = "playing3";
+                playAccept(audio.buggsyVictoryAccept3, "ready");
+              }, 5000);
+            });
+          }
+        }, 3000);
+      });
+    }, 6000);
+
+    return () => {
+      if (acceptTimerRef.current) clearTimeout(acceptTimerRef.current);
+      audio.buggsyVictoryAccept1.pause();
+      audio.buggsyVictoryAccept1.onended = null;
+      audio.buggsyVictoryAccept2.pause();
+      audio.buggsyVictoryAccept2.onended = null;
+      audio.buggsyVictoryAccept3.pause();
+      audio.buggsyVictoryAccept3.onended = null;
+    };
+  }, [scene, playAccept]);
 
   // Scene 3: Play note audio when scene is fully visible, then restart bg music
   useEffect(() => {
@@ -230,10 +289,8 @@ export default function Victory() {
     };
   }, []);
 
-  // Scene 2: Peep tap handler — power-up sequence
-  const handlePeepTap = useCallback(() => {
-    if (scene !== "peep" || fading || poweringUp) return;
-
+  // Scene 2: Peep tap handler — accept sequence + power-up
+  const startPowerUp = useCallback(() => {
     // Start power-up audio
     const powerClip = audio.victoryPoweringUp;
     powerClip.currentTime = 0;
@@ -259,7 +316,49 @@ export default function Victory() {
       setFadeDuration(0);
       setFading(true);
     };
-  }, [scene, fading, poweringUp]);
+  }, []);
+
+  const handlePeepTap = useCallback(() => {
+    if (scene !== "peep" || fading || poweringUp) return;
+    const phase = acceptPhaseRef.current;
+
+    if (phase === "waiting1") {
+      // Skip 6s wait, play accept-1 immediately
+      if (acceptTimerRef.current) clearTimeout(acceptTimerRef.current);
+      acceptPhaseRef.current = "playing1";
+      playAccept(audio.buggsyVictoryAccept1, "waiting2", () => {
+        wait2TimerDoneRef.current = false;
+        wait2ClickedRef.current = false;
+        acceptTimerRef.current = setTimeout(() => {
+          wait2TimerDoneRef.current = true;
+          if (wait2ClickedRef.current) {
+            acceptPhaseRef.current = "playing2";
+            playAccept(audio.buggsyVictoryAccept2, "waiting3", () => {
+              acceptTimerRef.current = setTimeout(() => {
+                acceptPhaseRef.current = "playing3";
+                playAccept(audio.buggsyVictoryAccept3, "ready");
+              }, 5000);
+            });
+          }
+        }, 3000);
+      });
+    } else if (phase === "waiting2") {
+      // Click registered — if 3s already passed, play accept-2
+      wait2ClickedRef.current = true;
+      if (wait2TimerDoneRef.current) {
+        acceptPhaseRef.current = "playing2";
+        playAccept(audio.buggsyVictoryAccept2, "waiting3", () => {
+          acceptTimerRef.current = setTimeout(() => {
+            acceptPhaseRef.current = "playing3";
+            playAccept(audio.buggsyVictoryAccept3, "ready");
+          }, 5000);
+        });
+      }
+    } else if (phase === "ready") {
+      startPowerUp();
+    }
+    // playing1, playing2, waiting3, playing3 — ignore clicks
+  }, [scene, fading, poweringUp, playAccept, startPowerUp]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden select-none"
