@@ -19,6 +19,7 @@ import loadingEgg from "./loading-egg.webp";
 import peepGolden from "./peep-golden.webp";
 import victoryDust from "./victory-dust.webp";
 import victoryNote from "./victory-note.webp";
+import victoryBuggsy from "./victory-buggsy.webp";
 import cloud1 from "./cloud-1.webp";
 import cloud2 from "./cloud-2.webp";
 import cloud3 from "./cloud-3.webp";
@@ -72,6 +73,8 @@ import buggsyVictoryAccept1 from "./buggsy-victory-accept-1.mp3";
 import buggsyVictoryAccept2 from "./buggsy-victory-accept-2.mp3";
 import buggsyVictoryAccept3 from "./buggsy-victory-accept-3.mp3";
 import explosion from "./explosion.mp3";
+import cuckoo from "./cuckoo.mp3";
+import electricity from "./electricity.mp3";
 import buggsyLoseMad from "./buggsy-lose-mad.mp3";
 import buggsyLoseEggShortage from "./buggsy-lose-egg-shortage.mp3";
 import buggsyLoseSecondChances from "./buggsy-lose-second-chances.mp3";
@@ -104,6 +107,7 @@ export const images = {
   peepGolden,
   victoryDust,
   victoryNote,
+  victoryBuggsy,
   clouds: [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7, cloud8, cloud9, cloud10],
   qr,
 } as const;
@@ -153,6 +157,8 @@ export const audio = {
   buggsyVictoryAccept2: new Audio(buggsyVictoryAccept2),
   buggsyVictoryAccept3: new Audio(buggsyVictoryAccept3),
   explosion: new Audio(explosion),
+  cuckoo: new Audio(cuckoo),
+  electricity: new Audio(electricity),
 } as const;
 
 export function stopAllVoices() {

@@ -237,14 +237,32 @@ export default function Victory() {
     if (!poweringUp) return;
     let lastOrbCount = 3;
     let concernPlayed = false;
+    let cuckooPlayed = false;
+    let electricityStarted = false;
     const tick = () => {
       const p = Math.min(1, audio.victoryPoweringUp.currentTime / POWER_UP_DURATION);
+      const t = audio.victoryPoweringUp.currentTime;
 
-      // Play concern clip at 10s
-      if (!concernPlayed && audio.victoryPoweringUp.currentTime >= 2) {
+      // Play concern clip at 2s
+      if (!concernPlayed && t >= 2) {
         concernPlayed = true;
         audio.buggsyVictoryConcern.currentTime = 0;
         audio.buggsyVictoryConcern.play();
+      }
+
+      // Start electricity loop at 10s
+      if (!electricityStarted && t >= 10) {
+        electricityStarted = true;
+        audio.electricity.loop = true;
+        audio.electricity.currentTime = 0;
+        audio.electricity.play();
+      }
+
+      // Play cuckoo at 15s
+      if (!cuckooPlayed && t >= 16.5) {
+        cuckooPlayed = true;
+        audio.cuckoo.currentTime = 0;
+        audio.cuckoo.play();
       }
 
       // Orb count: linear 3 → 26
@@ -313,6 +331,8 @@ export default function Victory() {
 
     // When power-up audio ends: instant cut to black, then handleFadeEnd takes over
     powerClip.onended = () => {
+      audio.electricity.pause();
+      audio.electricity.loop = false;
       audio.explosion.currentTime = 0;
       audio.explosion.play();
       setFadeDuration(0);
@@ -374,7 +394,13 @@ export default function Victory() {
     >
       {/* Scene content */}
       {scene === "buggsy" && (
-        <div className="fixed inset-0 z-10 cursor-pointer" onClick={handleBuggsyTap} />
+        <div className="fixed inset-0 z-10 cursor-pointer" onClick={handleBuggsyTap}>
+          <img
+            src={images.victoryBuggsy}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
       )}
 
       {scene === "peep" && (

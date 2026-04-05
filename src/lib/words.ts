@@ -5762,6 +5762,13 @@ const VALID_WORDS = new Set([
   'ZOWIE',
 ]);
 
+export const EASTER_WORDS = new Set(["bunny","chick","lambs","doves","robin","candy","peeps","jelly","beans","fudge","cream","icing","feast","bread","rolls","glaze","honey","sugar","cocoa","torte","cakes","grass","bloom","tulip","daisy","lilac","flora","petal","seeds","vines","stems","leafy","green","sunny","earth","ovoid","color","paint","azure","cross","faith","risen","grace","bless","psalm","peace","angel","glory","light","stone","palms","robes","crown","thorn","atone","mercy","saved","reign","alive","arise","hunts","hatch","weave","sewed","gifts","games","dance","march","choir","hymns","songs","teach","kneel","serve","share","dress","braid","rainy","misty","fresh","winds","cloud","april","ivory","coral","peach","mauve","blush","white","lemon","minty","straw","laced","wraps","cloth","linen","decor","trims","floss","beads","woven","loops","bands","curls","silks","plume"])
+
 export function isValidWord(word: string): boolean {
   return VALID_WORDS.has(word.toUpperCase());
+}
+
+export function getRandomEasterWord(): string {
+  const words = [...EASTER_WORDS];
+  return words[Math.floor(Math.random() * words.length)].toUpperCase();
 }

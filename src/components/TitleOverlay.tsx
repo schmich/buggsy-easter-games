@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Modal, Button, useOverlayState } from "@heroui/react";
 import Sparkles from "./Sparkles";
 import SunRays from "./SunRays";
-import { assetsReady, images, audio, isSoundsMuted, isMusicMuted, toggleSoundsMuted, toggleMusicMuted, onSoundsChange, onMusicChange, playContinue, playBell, onLoadProgress } from "../assets";
+import { assetsReady, images, audio, isSoundsMuted, isMusicMuted, toggleSoundsMuted, toggleMusicMuted, onSoundsChange, onMusicChange, playContinue, playBell, playClick, onLoadProgress } from "../assets";
+import { isRandomMode, toggleGameMode, onGameModeChange } from "../lib/gameMode";
 
 interface TitleOverlayProps {
   isOpen: boolean;
@@ -23,9 +24,11 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
   const [soundsMuted, setSoundsMuted] = useState(isSoundsMuted);
   const [musicMuted, setMusicMuted] = useState(isMusicMuted);
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+  const [randomMode, setRandomMode] = useState(isRandomMode);
 
   useEffect(() => onSoundsChange(setSoundsMuted), []);
   useEffect(() => onMusicChange(setMusicMuted), []);
+  useEffect(() => onGameModeChange(() => setRandomMode(isRandomMode())), []);
 
   useEffect(() => {
     const handler = () => setIsFullscreen(!!document.fullscreenElement);
@@ -183,32 +186,54 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
                     <Sparkles active={showButton} />
                   </div>
                 </div>
-                <div className="flex flex-col gap-3 w-64 -mt-[10px]">
-                  <Button
-                    onPress={toggleFullscreen}
-                    className="bg-gradient-to-r from-[#7eb8da] to-[#a0d0ef] text-white text-base w-full py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    {isFullscreen ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="4 14 10 14 10 20" />
-                        <polyline points="20 10 14 10 14 4" />
-                        <line x1="14" y1="10" x2="21" y2="3" />
-                        <line x1="3" y1="21" x2="10" y2="14" />
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 3 21 3 21 9" />
-                        <polyline points="9 21 3 21 3 15" />
-                        <line x1="21" y1="3" x2="14" y2="10" />
-                        <line x1="3" y1="21" x2="10" y2="14" />
-                      </svg>
-                    )}
-                    {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
-                  </Button>
+                <div className="flex flex-col gap-3 w-80 -mt-[10px]">
                   <div className="flex gap-3 w-full">
                     <Button
-                      onPress={toggleSoundsMuted}
-                      className={`bg-gradient-to-r from-[#b07fd0] to-[#cda4e6] text-white text-base flex-1 py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2 ${soundsMuted ? "opacity-50" : ""}`}
+                      onPress={() => { playClick(); toggleFullscreen(); }}
+                      className="bg-gradient-to-r from-[#7eb8da] to-[#a0d0ef] text-white text-base flex-1 basis-0 py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2"
+                    >
+                      {isFullscreen ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="4 14 10 14 10 20" />
+                          <polyline points="20 10 14 10 14 4" />
+                          <line x1="14" y1="10" x2="21" y2="3" />
+                          <line x1="3" y1="21" x2="10" y2="14" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="15 3 21 3 21 9" />
+                          <polyline points="9 21 3 21 3 15" />
+                          <line x1="21" y1="3" x2="14" y2="10" />
+                          <line x1="3" y1="21" x2="10" y2="14" />
+                        </svg>
+                      )}
+                      {isFullscreen ? "Exit" : "Fullscreen"}
+                    </Button>
+                    <Button
+                      onPress={() => { playClick(); toggleGameMode(); }}
+                      className="bg-gradient-to-r from-[#7eb8da] to-[#a0d0ef] text-white text-base flex-1 basis-0 py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2"
+                    >
+                      {randomMode ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="16 3 21 3 21 8" />
+                          <line x1="4" y1="20" x2="21" y2="3" />
+                          <polyline points="21 16 21 21 16 21" />
+                          <line x1="15" y1="15" x2="21" y2="21" />
+                          <line x1="4" y1="4" x2="9" y2="9" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                      )}
+                      {randomMode ? "Randomize" : "Standard"}
+                    </Button>
+                  </div>
+                  <div className="flex gap-3 w-full">
+                    <Button
+                      onPress={() => { playClick(); toggleSoundsMuted(); }}
+                      className={`bg-gradient-to-r from-[#b07fd0] to-[#cda4e6] text-white text-base flex-1 basis-0 py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2 ${soundsMuted ? "opacity-50" : ""}`}
                     >
                       {soundsMuted ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -225,8 +250,8 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
                       Sounds
                     </Button>
                     <Button
-                      onPress={toggleMusicMuted}
-                      className={`bg-gradient-to-r from-[#b07fd0] to-[#cda4e6] text-white text-base flex-1 py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2 ${musicMuted ? "opacity-50" : ""}`}
+                      onPress={() => { playClick(); toggleMusicMuted(); }}
+                      className={`bg-gradient-to-r from-[#b07fd0] to-[#cda4e6] text-white text-base flex-1 basis-0 py-4 rounded-full shadow-md hover:scale-105 transition-all duration-250 cursor-pointer flex items-center justify-center gap-2 ${musicMuted ? "opacity-50" : ""}`}
                     >
                       {musicMuted ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -248,7 +273,7 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
                 </div>
                 <Button
                   onPress={handleContinue}
-                  className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-64 mt-4 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
+                  className="bg-gradient-to-r from-[#5aad55] to-[#77c572] text-white text-xl w-80 mt-4 mb-4 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-250 cursor-pointer"
                 >
                   Play
                 </Button>
