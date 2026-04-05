@@ -19,7 +19,8 @@ import loadingEgg from "./loading-egg.webp";
 import peepGolden from "./peep-golden.webp";
 import victoryDust from "./victory-dust.webp";
 import victoryNote from "./victory-note.webp";
-import victoryBuggsy from "./victory-buggsy.webp";
+import victoryBuggsyTears from "./victory-buggsy-tears.webp";
+import victoryBuggsyGift from "./victory-buggsy-gift.webp";
 import cloud1 from "./cloud-1.webp";
 import cloud2 from "./cloud-2.webp";
 import cloud3 from "./cloud-3.webp";
@@ -107,7 +108,8 @@ export const images = {
   peepGolden,
   victoryDust,
   victoryNote,
-  victoryBuggsy,
+  victoryBuggsyTears: victoryBuggsyTears,
+  victoryBuggsyGift: victoryBuggsyGift,
   clouds: [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7, cloud8, cloud9, cloud10],
   qr,
 } as const;

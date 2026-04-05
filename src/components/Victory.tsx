@@ -74,6 +74,7 @@ export default function Victory() {
   const [sceneVisible, setSceneVisible] = useState(true);
   const [fadeDuration, setFadeDuration] = useState(4000);
   const [poweringUp, setPoweringUp] = useState(false);
+  const [showGift, setShowGift] = useState(false);
   const [visibleOrbCount, setVisibleOrbCount] = useState(3);
 
   const brightnessOverlayRef = useRef<HTMLDivElement>(null);
@@ -98,8 +99,10 @@ export default function Victory() {
       setFading(true);
       stopBackgroundMusic(4000);
     };
+    const crossfadeTimer = setTimeout(() => setShowGift(true), 30000);
     return () => {
       clip.onended = null;
+      clearTimeout(crossfadeTimer);
     };
   }, []);
 
@@ -283,7 +286,7 @@ export default function Victory() {
       }
 
       // Brightness: cubic 1.0 → 6.0
-      const brightness = 1 + 5 * p * p * p;
+      const brightness = 1 + 6 * p * p * p;
       if (brightnessOverlayRef.current) {
         brightnessOverlayRef.current.style.backdropFilter = `brightness(${brightness})`;
         (brightnessOverlayRef.current.style as unknown as Record<string, string>).webkitBackdropFilter = `brightness(${brightness})`;
@@ -396,9 +399,19 @@ export default function Victory() {
       {scene === "buggsy" && (
         <div className="fixed inset-0 z-10 cursor-pointer" onClick={handleBuggsyTap}>
           <img
-            src={images.victoryBuggsy}
+            src={images.victoryBuggsyGift}
             alt=""
             className="w-full h-full object-cover"
+          />
+          <img
+            src={images.victoryBuggsyTears}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[5000ms] ease-in-out"
+            style={{
+              opacity: showGift ? 0 : 1,
+              transformOrigin: "50% 20%",
+              animation: "slow-zoom 30s linear forwards",
+            }}
           />
         </div>
       )}

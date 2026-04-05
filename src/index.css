@@ -282,6 +282,15 @@ body {
   }
 }
 
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.15);
+  }
+}
+
 @keyframes orb-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
