@@ -436,7 +436,7 @@ export default function Victory() {
               alt=""
               className="relative z-10 h-[43vh] max-h-[370px] w-auto"
             />
-            <Sparkles active interval={80} minSize={4} maxSize={20} />
+            <Sparkles active interval={40} minSize={3} maxSize={22} circular />
             {poweringUp && SWIRL_ORBS.slice(0, visibleOrbCount).filter((o) => o.front).map((orb, i) => (
               <div key={`f${i}`} className="absolute inset-0 pointer-events-none z-20" style={{
                 animationName: "swirl-ring, orb-fade-in",

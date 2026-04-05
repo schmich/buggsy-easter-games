@@ -5,7 +5,6 @@ import TitleOverlay from "./TitleOverlay";
 
 export default function Layout() {
   const [titleDismissed, setTitleDismissed] = useState(false);
-  const [gameReady, setGameReady] = useState(false);
   const [assetsLoaded, setAssetsLoaded] = useState(false);
   const [showDecorations, setShowDecorations] = useState(false);
 
@@ -14,13 +13,6 @@ export default function Layout() {
     const t = setTimeout(() => setShowDecorations(true), 300);
     return () => clearTimeout(t);
   }, [assetsLoaded]);
-
-  // Delay game mount to let TitleOverlay teardown settle before mounting game
-  useEffect(() => {
-    if (!titleDismissed) return;
-    const id = setTimeout(() => setGameReady(true), 500);
-    return () => clearTimeout(id);
-  }, [titleDismissed]);
 
   return (
     <div
@@ -42,7 +34,7 @@ export default function Layout() {
 
       {titleDismissed ? (
         <div className="flex flex-col flex-1 overflow-hidden relative z-[12]">
-          {gameReady && <Outlet />}
+          <Outlet />
         </div>
       ) : (
         <>

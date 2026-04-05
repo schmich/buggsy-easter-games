@@ -9,6 +9,7 @@ interface SparklesProps {
   maxSize?: number;
   padX?: number;
   padY?: number;
+  circular?: boolean;
 }
 
 export default function Sparkles({
@@ -19,6 +20,7 @@ export default function Sparkles({
   maxSize = 16,
   padX = 5,
   padY = 10,
+  circular = false,
 }: SparklesProps) {
   const [sparkles, setSparkles] = useState<{ id: number; left: number; top: number; size: number }[]>([]);
   const history = useRef<{ left: number; top: number }[]>([]);
@@ -29,8 +31,15 @@ export default function Sparkles({
     const timer = setInterval(() => {
       let left: number, top: number, attempts = 0;
       do {
-        left = padX + Math.random() * (100 - padX * 2);
-        top = padY + Math.random() * (100 - padY * 2);
+        if (circular) {
+          const angle = Math.random() * Math.PI * 2;
+          const r = Math.sqrt(Math.random()) * (50 - padX);
+          left = 50 + r * Math.cos(angle);
+          top = 50 + r * Math.sin(angle);
+        } else {
+          left = padX + Math.random() * (100 - padX * 2);
+          top = padY + Math.random() * (100 - padY * 2);
+        }
         attempts++;
       } while (
         attempts < 20 &&

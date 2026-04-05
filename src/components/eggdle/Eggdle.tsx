@@ -215,14 +215,16 @@ export default function Eggdle({ targetWord }: EggdleProps) {
 
   return (
     <>
-      {!showIntro && <Clouds />}
-      <Decorations
-        topLeft={{ src: images.jellyBeans, className: "top-[80px] w-[140px]", style: { left: "-5%" } }}
-        topRight={{ src: images.chocolateBunny, className: "top-[50px] w-[120px]", style: { right: "-5%" } }}
-        bottomLeft={{ src: images.goldBunnyLeft, className: "h-[300px] w-auto", style: { bottom: "80px", left: "-40px" }, sparkle: true, belowGrass: true }}
-        bottomRight={{ src: images.goldBunnyRight, className: "h-[300px] w-auto", style: { bottom: "80px", right: "-40px" }, sparkle: true, belowGrass: true }}
-      />
-      <Header title="Eggdle" />
+      {!showIntro && <>
+        <Clouds />
+        <Decorations
+          topLeft={{ src: images.jellyBeans, className: "top-[80px] w-[140px]", style: { left: "-5%" } }}
+          topRight={{ src: images.chocolateBunny, className: "top-[50px] w-[120px]", style: { right: "-5%" } }}
+          bottomLeft={{ src: images.goldBunnyLeft, className: "h-[300px] w-auto", style: { bottom: "80px", left: "-40px" }, sparkle: true, belowGrass: true }}
+          bottomRight={{ src: images.goldBunnyRight, className: "h-[300px] w-auto", style: { bottom: "80px", right: "-40px" }, sparkle: true, belowGrass: true }}
+        />
+        <Header title="Eggdle" />
+      </>}
       <Toast message={toast} />
       <div className="flex flex-col items-center justify-between flex-1 overflow-hidden relative z-10">
         <div className="flex items-center justify-center flex-1 w-full">
