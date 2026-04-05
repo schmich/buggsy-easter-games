@@ -10,6 +10,8 @@ interface TitleOverlayProps {
   onLoaded?: () => void;
 }
 
+const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && window.innerWidth < 1024);
+
 export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverlayProps) {
   const state = useOverlayState({ isOpen, onOpenChange: () => {} });
   const [progress, setProgress] = useState(0);
@@ -94,6 +96,16 @@ export default function TitleOverlay({ isOpen, onDismiss, onLoaded }: TitleOverl
     return () => window.removeEventListener("keydown", handler);
   }, [showButton, handleContinue]);
 
+
+  // Non-mobile: show QR code screen only
+  if (!isMobile) {
+    return (
+      <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50 gap-4">
+        <p className="text-[#6b4c8a] text-lg font-medium">Intended as a mobile experience only</p>
+        <img src={images.qr} alt="QR code" className="w-48 h-48" />
+      </div>
+    );
+  }
 
   // Phase 1: Loading egg
   if (!showDialog) {

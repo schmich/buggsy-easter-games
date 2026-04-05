@@ -29,6 +29,7 @@ import cloud7 from "./cloud-7.webp";
 import cloud8 from "./cloud-8.webp";
 import cloud9 from "./cloud-9.webp";
 import cloud10 from "./cloud-10.webp";
+import qr from "./qr.png";
 
 // Audio
 import buggsyEggdleWin from "./buggsy-eggdle-win.mp3";
@@ -104,6 +105,7 @@ export const images = {
   victoryDust,
   victoryNote,
   clouds: [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7, cloud8, cloud9, cloud10],
+  qr,
 } as const;
 
 // Preload all images and audio — returns a promise that resolves when all are loaded
