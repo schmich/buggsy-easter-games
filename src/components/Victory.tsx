@@ -116,12 +116,12 @@ export default function Victory() {
         // Now safe to remove brightness overlay — screen is black
         setPoweringUp(false);
         setVisibleOrbCount(3);
-        // Hold on black for 5s, then fade in to note
+        // Hold on black for 6s, then fade in to note
         setTimeout(() => {
           setScene("note");
           setFadeDuration(4000);
           setSceneVisible(true);
-        }, 5000);
+        }, 6000);
       }
     } else {
       // Scene is now visible, fade is done
@@ -313,6 +313,8 @@ export default function Victory() {
 
     // When power-up audio ends: instant cut to black, then handleFadeEnd takes over
     powerClip.onended = () => {
+      audio.explosion.currentTime = 0;
+      audio.explosion.play();
       setFadeDuration(0);
       setFading(true);
     };

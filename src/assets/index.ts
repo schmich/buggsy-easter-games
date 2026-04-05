@@ -70,6 +70,7 @@ import buggsyVictoryConcern from "./buggsy-victory-concern.mp3";
 import buggsyVictoryAccept1 from "./buggsy-victory-accept-1.mp3";
 import buggsyVictoryAccept2 from "./buggsy-victory-accept-2.mp3";
 import buggsyVictoryAccept3 from "./buggsy-victory-accept-3.mp3";
+import explosion from "./explosion.mp3";
 import buggsyLoseMad from "./buggsy-lose-mad.mp3";
 import buggsyLoseEggShortage from "./buggsy-lose-egg-shortage.mp3";
 import buggsyLoseSecondChances from "./buggsy-lose-second-chances.mp3";
@@ -149,6 +150,7 @@ export const audio = {
   buggsyVictoryAccept1: new Audio(buggsyVictoryAccept1),
   buggsyVictoryAccept2: new Audio(buggsyVictoryAccept2),
   buggsyVictoryAccept3: new Audio(buggsyVictoryAccept3),
+  explosion: new Audio(explosion),
 } as const;
 
 export function stopAllVoices() {
