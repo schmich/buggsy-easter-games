@@ -116,12 +116,12 @@ export default function Victory() {
         // Now safe to remove brightness overlay — screen is black
         setPoweringUp(false);
         setVisibleOrbCount(3);
-        // Hold on black for 6s, then fade in to note
+        // Hold on black for 7s, then fade in to note
         setTimeout(() => {
           setScene("note");
           setFadeDuration(4000);
           setSceneVisible(true);
-        }, 6000);
+        }, 7000);
       }
     } else {
       // Scene is now visible, fade is done
@@ -374,13 +374,7 @@ export default function Victory() {
     >
       {/* Scene content */}
       {scene === "buggsy" && (
-        <div className="flex flex-col items-center z-10 cursor-pointer" onClick={handleBuggsyTap}>
-          <img
-            src={images.buggsy}
-            alt=""
-            className="h-[50vh] max-h-[500px] w-auto animate-egg-pulse"
-          />
-        </div>
+        <div className="fixed inset-0 z-10 cursor-pointer" onClick={handleBuggsyTap} />
       )}
 
       {scene === "peep" && (
