@@ -241,7 +241,7 @@ export default function Victory() {
       const p = Math.min(1, audio.victoryPoweringUp.currentTime / POWER_UP_DURATION);
 
       // Play concern clip at 10s
-      if (!concernPlayed && audio.victoryPoweringUp.currentTime >= 3) {
+      if (!concernPlayed && audio.victoryPoweringUp.currentTime >= 2) {
         concernPlayed = true;
         audio.buggsyVictoryConcern.currentTime = 0;
         audio.buggsyVictoryConcern.play();
