@@ -36,6 +36,17 @@ import announcerEggdle from "./announcer-eggdle.mp3";
 import announcerConneggtions from "./announcer-conneggtions.mp3";
 import buggsyMissAintItChief from "./buggsy-miss-aint-it-chief.mp3";
 import buggsyMissHardBoiledEgg from "./buggsy-miss-hard-boiled-egg.mp3";
+import buggsyMissCottonTail from "./buggsy-miss-cotton-tail.mp3";
+import buggsyMissBold from "./buggsy-miss-bold.mp3";
+import buggsyMissWhiskers from "./buggsy-miss-whiskers.mp3";
+import buggsyMissWarmer from "./buggsy-miss-warmer.mp3";
+import buggsyMissSpring from "./buggsy-miss-spring.mp3";
+import buggsyMissFloppy from "./buggsy-miss-floppy.mp3";
+import buggsyMissMelted from "./buggsy-miss-melted.mp3";
+import buggsyMissSetBack from "./buggsy-miss-set-back.mp3";
+import buggsyMissSerious from "./buggsy-miss-serious.mp3";
+import buggsyMissGray from "./buggsy-miss-gray.mp3";
+import buggsyMissChipmunk from "./buggsy-miss-chipmunk.mp3";
 import buggsyConneggtionsWin from "./buggsy-conneggtions-win.mp3";
 import buggsyWelcomeTraveler from "./buggsy-title-welcome-travelers.mp3";
 import buggsyWelcomeBackTraveler from "./buggsy-title-welcome-back-travelers.mp3";
@@ -225,6 +236,17 @@ const missedClips = [
   new Audio(buggsyMissSwing),
   new Audio(buggsyMissAintItChief),
   new Audio(buggsyMissHardBoiledEgg),
+  new Audio(buggsyMissCottonTail),
+  new Audio(buggsyMissBold),
+  new Audio(buggsyMissWhiskers),
+  new Audio(buggsyMissWarmer),
+  new Audio(buggsyMissSpring),
+  new Audio(buggsyMissFloppy),
+  new Audio(buggsyMissMelted),
+  new Audio(buggsyMissSetBack),
+  new Audio(buggsyMissSerious),
+  new Audio(buggsyMissGray),
+  new Audio(buggsyMissChipmunk),
 ];
 
 function shuffle<T>(arr: T[]): T[] {
