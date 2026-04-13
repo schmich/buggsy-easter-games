@@ -128,14 +128,13 @@ function preloadImage(src: string): Promise<void> {
 }
 
 function preloadAudio(audioEl: HTMLAudioElement): Promise<void> {
-  return new Promise((resolve) => {
-    if (audioEl.readyState >= 3) {
-      resolve();
-      return;
-    }
-    audioEl.addEventListener("canplaythrough", () => resolve(), { once: true });
-    audioEl.addEventListener("error", () => resolve(), { once: true });
-  });
+  // Use fetch() to reliably download audio into browser cache on all platforms.
+  // Mobile browsers block HTMLAudioElement loading until user gesture,
+  // but fetch() works without restrictions. The Audio element will then
+  // use the cached response when it plays.
+  return fetch(audioEl.src)
+    .then(() => {})
+    .catch(() => {});
 }
 
 const preloadedImages: HTMLImageElement[] = [];
