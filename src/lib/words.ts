@@ -203,6 +203,7 @@ const VALID_WORDS = new Set([
   'APORT',
   'APPLE',
   'APPLY',
+  'APRIL',
   'APRON',
   'APSES',
   'APSOS',
@@ -3111,6 +3112,7 @@ const VALID_WORDS = new Set([
   'MINKS',
   'MINOR',
   'MINTS',
+  'MINTY',
   'MINUS',
   'MIRED',
   'MIRES',
@@ -5762,7 +5764,7 @@ const VALID_WORDS = new Set([
   'ZOWIE',
 ]);
 
-export const EASTER_WORDS = new Set(["bunny","chick","lambs","doves","robin","candy","peeps","jelly","beans","fudge","cream","icing","feast","bread","rolls","glaze","honey","sugar","cocoa","torte","cakes","grass","bloom","tulip","daisy","lilac","flora","petal","seeds","vines","stems","leafy","green","sunny","earth","ovoid","color","paint","azure","cross","faith","risen","grace","bless","psalm","peace","angel","glory","light","stone","palms","robes","crown","thorn","atone","mercy","saved","reign","alive","arise","hunts","hatch","weave","sewed","gifts","games","dance","march","choir","hymns","songs","teach","kneel","serve","share","dress","braid","rainy","misty","fresh","winds","cloud","april","ivory","coral","peach","mauve","blush","white","lemon","minty","straw","laced","wraps","cloth","linen","decor","trims","floss","beads","woven","loops","bands","curls","silks","plume"])
+export const EASTER_WORDS = new Set(["BUNNY","CHICK","LAMBS","DOVES","ROBIN","CANDY","PEEPS","JELLY","BEANS","FUDGE","CREAM","ICING","FEAST","BREAD","ROLLS","GLAZE","HONEY","SUGAR","COCOA","TORTE","CAKES","GRASS","BLOOM","TULIP","DAISY","LILAC","FLORA","PETAL","SEEDS","VINES","STEMS","LEAFY","GREEN","SUNNY","EARTH","OVOID","COLOR","PAINT","AZURE","CROSS","FAITH","RISEN","GRACE","BLESS","PSALM","PEACE","ANGEL","GLORY","LIGHT","STONE","PALMS","ROBES","CROWN","THORN","ATONE","MERCY","SAVED","REIGN","ALIVE","ARISE","HUNTS","HATCH","WEAVE","SEWED","GIFTS","GAMES","DANCE","MARCH","CHOIR","HYMNS","SONGS","TEACH","KNEEL","SERVE","SHARE","DRESS","BRAID","RAINY","MISTY","FRESH","WINDS","CLOUD","APRIL","IVORY","CORAL","PEACH","MAUVE","BLUSH","WHITE","LEMON","MINTY","STRAW","LACED","WRAPS","CLOTH","LINEN","DECOR","TRIMS","FLOSS","BEADS","WOVEN","LOOPS","BANDS","CURLS","SILKS","PLUME"])
 
 export function isValidWord(word: string): boolean {
   return VALID_WORDS.has(word.toUpperCase());
@@ -5770,5 +5772,5 @@ export function isValidWord(word: string): boolean {
 
 export function getRandomEasterWord(): string {
   const words = [...EASTER_WORDS];
-  return words[Math.floor(Math.random() * words.length)].toUpperCase();
+  return words[Math.floor(Math.random() * words.length)];
 }
